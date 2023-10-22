@@ -11,7 +11,7 @@ class NewsRepositoriesImp extends NewsRepository {
   NewsRepositoriesImp({required this.dio});
 
   @override
-  Future<Map<String, dynamic>> getNews(String country) async {
+  getNews(String country) async {
     try {
       Response response = await dio.get(ApiNewsConfig().newsCurl,
           queryParameters: {"country": country},
@@ -32,8 +32,7 @@ class NewsRepositoriesImp extends NewsRepository {
   }
 
   @override
-  Future<Map<String, dynamic>> getSearchNews(
-      String q, String datefrom, String sortBy) async {
+  getSearchNews(String q, String datefrom, String sortBy) async {
     try {
       Response response = await dio.get(ApiNewsConfig().searchNewsCurl,
           queryParameters: {"q": q, "datefrom": datefrom, "sortBy": sortBy},
@@ -44,6 +43,7 @@ class NewsRepositoriesImp extends NewsRepository {
       if (response.statusCode == 200) {
         //print(response.data);
         print(response.statusCode);
+        // print(response.runtimeType);
         return response.data;
       } else {
         throw Exception('Error ${response.statusCode},${response.realUri}');

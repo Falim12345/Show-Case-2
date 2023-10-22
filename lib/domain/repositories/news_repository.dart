@@ -1,10 +1,17 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_showcase_2/data/model/news_model.dart';
+
 abstract class NewsRepository {
-  Future<Map<String, dynamic>> getSearchNews(
+  Response<dynamic> getSearchNews(
     String q,
     String datefrom,
     String sortBy,
   );
-  Future<Map<String, dynamic>> getNews(
+  Response<dynamic> getNews(
     String country,
   );
+}
+
+abstract class NewsMapper {
+  List<NewsModel> mapApiDataToModels(List<Map<String, dynamic>> apiData);
 }
