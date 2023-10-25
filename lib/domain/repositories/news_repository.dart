@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_showcase_2/data/model/news_model.dart';
+import 'package:get_it/get_it.dart';
 
 abstract class NewsRepository {
   Response<dynamic> getSearchNews(

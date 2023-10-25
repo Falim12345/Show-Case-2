@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
+import 'package:flutter_showcase_2/data/setap_data_dependencies.dart';
 
 void main() {
+  SetapDataDependebcies().setapDependebcies();
   runApp(const MyApp());
   test();
 }
@@ -18,8 +20,7 @@ class MyApp extends StatelessWidget {
 
 test() async {
   try {
-    NewsRepositoriesImp(dio: Dio())
-        .getSearchNews("Apple", "2023-10-01", 'popularity');
+    NewsRepositoriesImp(dio: Dio()).getNews('us');
   } catch (e) {
     throw ('$e');
   }

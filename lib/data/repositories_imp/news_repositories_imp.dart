@@ -2,21 +2,25 @@
 
 import 'package:dio/dio.dart';
 import 'package:flutter_showcase_2/domain/repositories/news_repository.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../util/api_config.dart';
 
-class NewsRepositoriesImp extends NewsRepository {
+class NewsRepositoriesImp implements NewsRepository {
   final Dio dio;
+  final ApiNewsConfig apiConfig;
 
-  NewsRepositoriesImp({required this.dio});
+  NewsRepositoriesImp({required Dio dio})
+      : dio = GetIt.I<Dio>(),
+        apiConfig = GetIt.I<ApiNewsConfig>();
 
   @override
   getNews(String country) async {
     try {
-      Response response = await dio.get(ApiNewsConfig().newsCurl,
+      Response response = await dio.get(apiConfig.newsCurl,
           queryParameters: {"country": country},
           options: Options(
-            headers: {'Authorization': 'Bearer ${ApiNewsConfig().apiKey}'},
+            headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
           ));
       print(response.realUri);
       if (response.statusCode == 200) {
@@ -34,10 +38,10 @@ class NewsRepositoriesImp extends NewsRepository {
   @override
   getSearchNews(String q, String datefrom, String sortBy) async {
     try {
-      Response response = await dio.get(ApiNewsConfig().searchNewsCurl,
+      Response response = await dio.get(apiConfig.searchNewsCurl,
           queryParameters: {"q": q, "datefrom": datefrom, "sortBy": sortBy},
           options: Options(
-            headers: {'Authorization': 'Bearer ${ApiNewsConfig().apiKey}'},
+            headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
           ));
       print(response.realUri);
       if (response.statusCode == 200) {
