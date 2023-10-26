@@ -25,7 +25,7 @@ class NewsRepositoriesImp implements NewsRepository {
       print(response.realUri);
       if (response.statusCode == 200) {
         //print(response.data);
-        print(response.statusCode);
+        print(response.data);
         return response.data;
       } else {
         throw Exception('Error ${response.statusCode}');
