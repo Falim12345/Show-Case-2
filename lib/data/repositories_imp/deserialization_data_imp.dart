@@ -5,10 +5,10 @@ import 'package:flutter_showcase_2/domain/repositories/deserialization_data.dart
 import 'package:dio/src/response.dart';
 import 'package:get_it/get_it.dart';
 
-class DeserializationDataimp implements DeserializationData {
+class DeserializationDataImp implements DeserializationData {
   final Dio dio;
   final NewsRepositoriesImp newsRepImp;
-  DeserializationDataimp()
+  DeserializationDataImp()
       : dio = GetIt.I<Dio>(),
         newsRepImp = GetIt.I<NewsRepositoriesImp>();
   @override

@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 void main() {
   SetapDependebciesImp().setapDependebcies();
   runApp(const MyApp());
-  var dtData = DeserializationDataimp().deserializationDataFromApi();
+  var dtData = DeserializationDataImp().deserializationDataFromApi();
   print(dtData);
 }
 
@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
 
 test() async {
   try {
-    var dtData = DeserializationDataimp().deserializationDataFromApi();
     // NewsRepositoriesImp(dio: Dio()).getNews('us');
     // NewsRepositoriesImp(dio: Dio())
     //     .getSearchNews("Apple", "2023-10-01", "popularity");
