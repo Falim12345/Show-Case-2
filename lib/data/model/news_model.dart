@@ -1,26 +1,51 @@
-import 'package:flutter_showcase_2/domain/entities/news_entity.dart';
+class Source {
+  String id;
+  String name;
 
-class NewsModel extends NewsEntity {
-  NewsModel(
-      {required super.sourceName,
-      required super.author,
-      required super.title,
-      required super.description,
-      required super.url,
-      required super.imageUrl,
-      required super.publishedAt,
-      required super.content});
+  Source({required this.id, required this.name});
 
-  factory NewsModel.fromJson(Map<String, dynamic> json) {
-    return NewsModel(
-      sourceName: json['source']['name'],
-      author: json['author'],
-      title: json['title'],
-      description: json['description'],
-      url: json['url'],
-      imageUrl: json['urlToImage'],
-      publishedAt: DateTime.parse(json['publishedAt']),
-      content: json['content'],
+  factory Source.fromJson(Map<String, dynamic> json) {
+    return Source(
+      id: json["id"] as String,
+      name: json["name"] as String,
+    );
+  }
+}
+
+class NewsArticle {
+  final Source source;
+  final String author;
+  final String title;
+  final String description;
+  final String url;
+  final String imageUrl;
+  final DateTime publishedAt;
+  final String content;
+
+  NewsArticle({
+    required this.source,
+    required this.author,
+    required this.title,
+    required this.description,
+    required this.url,
+    required this.imageUrl,
+    required this.publishedAt,
+    required this.content,
+  });
+
+  factory NewsArticle.fromJson(json) {
+    return NewsArticle(
+      source: Source.fromJson(json["source"] ?? {"id": 'null', "name": ""}),
+      author: json['author'] ?? "",
+      title: json['title'] ?? "",
+      description: json['description'] ?? "",
+      url: json['url'] ?? "",
+      imageUrl: json['urlToImage'] ?? "",
+      publishedAt: json['publishedAt'] != null
+          ? DateTime.parse(json['publishedAt'])
+          : DateTime
+              .now(), // По умолчанию устанавливаем текущую дату, если publishedAt == null
+      content: json['content'] ?? "",
     );
   }
 }

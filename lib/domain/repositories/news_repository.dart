@@ -13,5 +13,5 @@ abstract class NewsRepository {
 }
 
 abstract class NewsMapper {
-  List<NewsModel> mapApiDataToModels(List<Map<String, dynamic>> apiData);
+  List<NewsArticle> mapApiDataToModels(List<Map<String, dynamic>> apiData);
 }

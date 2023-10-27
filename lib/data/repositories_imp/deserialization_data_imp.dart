@@ -12,11 +12,11 @@ class DeserializationDataImp implements DeserializationData {
       : dio = GetIt.I<Dio>(),
         newsRepImp = GetIt.I<NewsRepositoriesImp>();
   @override
-  Future<List<NewsModel>> deserializationDataFromApi() async {
+  Future<List<NewsArticle>> deserializationDataFromApi() async {
     var deserializationGetNews = newsRepImp.getNews('us');
     if (deserializationGetNews.statusCode == 200) {
-      return deserializationGetNews.data.map<NewsModel>((json) {
-            return NewsModel.fromJson(
+      return deserializationGetNews.data.map<NewsArticle>((json) {
+            return NewsArticle.fromJson(
                 json); // Преобразование JSON в объект NewsModel
           })?.toList() ??
           [];
