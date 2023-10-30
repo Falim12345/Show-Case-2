@@ -15,18 +15,19 @@ class NewsRepositoriesImp implements NewsRepository {
         apiConfig = GetIt.I<ApiNewsConfig>();
 
   @override
-  getNews(String country) async {
+  Future<Response<Map<String, dynamic>>> getNews(String country) async {
     try {
-      Response response = await dio.get(apiConfig.newsCurl,
-          queryParameters: {"country": country},
-          options: Options(
-            headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
-          ));
+      Response<Map<String, dynamic>> response =
+          await dio.get<Map<String, dynamic>>(
+        apiConfig.newsCurl,
+        queryParameters: {"country": country},
+        options: Options(
+          headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
+        ),
+      );
       print(response.realUri);
       if (response.statusCode == 200) {
-        //print(response.data);
-        print(response.data);
-        return response.data;
+        return response;
       } else {
         throw Exception('Error ${response.statusCode}');
       }
@@ -36,19 +37,20 @@ class NewsRepositoriesImp implements NewsRepository {
   }
 
   @override
-  getSearchNews(String q, String datefrom, String sortBy) async {
+  Future<Response<Map<String, dynamic>>> getSearchNews(
+      String q, String datefrom, String sortBy) async {
     try {
-      Response response = await dio.get(apiConfig.searchNewsCurl,
-          queryParameters: {"q": q, "datefrom": datefrom, "sortBy": sortBy},
-          options: Options(
-            headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
-          ));
+      Response<Map<String, dynamic>> response =
+          await dio.get<Map<String, dynamic>>(
+        apiConfig.searchNewsCurl,
+        queryParameters: {"q": q, "datefrom": datefrom, "sortBy": sortBy},
+        options: Options(
+          headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
+        ),
+      );
       print(response.realUri);
       if (response.statusCode == 200) {
-        //print(response.data);
-        print(response.statusCode);
-        // print(response.runtimeType);
-        return response.data;
+        return response;
       } else {
         throw Exception('Error ${response.statusCode},${response.realUri}');
       }
