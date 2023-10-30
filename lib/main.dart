@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_showcase_2/data/model/news_model.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
 import 'package:flutter_showcase_2/domain/entities/setap_dependencies.dart';
 import 'package:get_it/get_it.dart';
@@ -33,7 +34,10 @@ void testtest() async {
   var response = await NewsRepositoriesImp(dio: Dio()).getNews('us');
   var res2 =
       await NewsRepositoriesImp(dio: Dio()).getSearchNews('us', 'datefrom', '');
-  // print(response);
-  print(res2);
+  // print(res2.data);
+
+  NewsArticle article = NewsArticle.fromJson(res2.data);
+  print(article);
+
   //print(res2.runtimeType);
 }

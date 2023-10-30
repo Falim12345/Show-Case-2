@@ -1,6 +1,9 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:flutter_showcase_2/data/model/news_model.dart';
 import 'package:flutter_showcase_2/domain/repositories/news_repository.dart';
 import 'package:get_it/get_it.dart';
 
