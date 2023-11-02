@@ -1,51 +1,99 @@
-class Source {
-  String id;
-  String name;
+// To parse this JSON data, do
+//
+//     final newsArticle = newsArticleFromJson(jsonString);
 
-  Source({required this.id, required this.name});
+import 'dart:convert';
 
-  factory Source.fromJson(Map<String, dynamic> json) {
-    return Source(
-      id: json["id"] as String,
-      name: json["name"] as String,
-    );
-  }
-}
+NewsArticle newsArticleFromJson(String str) =>
+    NewsArticle.fromJson(json.decode(str));
+
+String newsArticleToJson(NewsArticle data) => json.encode(data.toJson());
 
 class NewsArticle {
-  final Source source;
-  final String author;
-  final String title;
-  final String description;
-  final String url;
-  final String imageUrl;
-  final DateTime publishedAt;
-  final String content;
+  String status;
+  int totalResults;
+  List<Article> articles;
 
   NewsArticle({
+    required this.status,
+    required this.totalResults,
+    required this.articles,
+  });
+
+  factory NewsArticle.fromJson(Map<String, dynamic> json) => NewsArticle(
+        status: json["status"],
+        totalResults: json["totalResults"],
+        articles: List<Article>.from(
+            json["articles"].map((x) => Article.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status,
+        "totalResults": totalResults,
+        "articles": List<dynamic>.from(articles.map((x) => x.toJson())),
+      };
+}
+
+class Article {
+  Source source;
+  String? author;
+  String title;
+  String? description;
+  String url;
+  String? urlToImage;
+  DateTime publishedAt;
+  String? content;
+
+  Article({
     required this.source,
     required this.author,
     required this.title,
     required this.description,
     required this.url,
-    required this.imageUrl,
+    required this.urlToImage,
     required this.publishedAt,
     required this.content,
   });
 
-  factory NewsArticle.fromJson(json) {
-    return NewsArticle(
-      source: Source.fromJson(json["source"] ?? {"id": 'null', "name": ""}),
-      author: json['author'] ?? "",
-      title: json['title'] ?? "",
-      description: json['description'] ?? "",
-      url: json['url'] ?? "",
-      imageUrl: json['urlToImage'] ?? "",
-      publishedAt: json['publishedAt'] != null
-          ? DateTime.parse(json['publishedAt'])
-          : DateTime
-              .now(), // По умолчанию устанавливаем текущую дату, если publishedAt == null
-      content: json['content'] ?? "",
-    );
-  }
+  factory Article.fromJson(Map<String, dynamic> json) => Article(
+        source: Source.fromJson(json["source"]),
+        author: json["author"],
+        title: json["title"],
+        description: json["description"],
+        url: json["url"],
+        urlToImage: json["urlToImage"],
+        publishedAt: DateTime.parse(json["publishedAt"]),
+        content: json["content"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "source": source.toJson(),
+        "author": author,
+        "title": title,
+        "description": description,
+        "url": url,
+        "urlToImage": urlToImage,
+        "publishedAt": publishedAt.toIso8601String(),
+        "content": content,
+      };
+}
+
+class Source {
+  String? id;
+  String name;
+
+  Source({
+    required this.id,
+    required this.name,
+  });
+
+  factory Source.fromJson(Map<String, dynamic> json) => Source(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+      };
 }

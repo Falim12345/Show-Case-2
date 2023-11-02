@@ -3,12 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/data/model/news_model.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
 import 'package:flutter_showcase_2/domain/entities/setap_dependencies.dart';
-import 'package:get_it/get_it.dart';
 
-void main() {
+void main() async {
   SetapDependebciesImp().setapDependebcies();
   runApp(const MyApp());
   testtest();
+  // Получаем новости из API
+  NewsArticle news = await NewsRepositoriesImp(dio: Dio()).getNews("us");
+
+  // Выводим значения полей объекта NewsArticle в консоль
+  print("Status: ${news.status}");
+  print("Total Results: ${news.totalResults}");
+
+  // Выводим значения полей каждой статьи в консоль
+  for (Article article in news.articles) {
+    // print("Source Name: ${article.source.name}");
+    // print("Author: ${article.author ?? 'N/A'}");
+    print("Title: ${article.title}");
+    // print("Description: ${article.description ?? 'N/A'}");
+    // print("URL: ${article.url}");
+    // print("URL to Image: ${article.urlToImage ?? 'N/A'}");
+    // print("Published At: ${article.publishedAt}");
+    // print("Content: ${article.content ?? 'N/A'}");
+    // print("----------------------");
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -20,24 +38,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-test() async {
-  try {
-    NewsRepositoriesImp(dio: Dio()).getNews('us');
-    // NewsRepositoriesImp(dio: Dio())
-    //     .getSearchNews("Apple", "2023-10-01", "popularity");
-  } catch (e) {
-    throw ('$e');
-  }
-}
-
-void testtest() async {
-  var response = await NewsRepositoriesImp(dio: Dio()).getNews('us');
-  var res2 =
-      await NewsRepositoriesImp(dio: Dio()).getSearchNews('us', 'datefrom', '');
-  // print(res2.data);
-
-  NewsArticle article = NewsArticle.fromJson(res2.data);
-  print(article);
-
-  //print(res2.runtimeType);
-}
+void testtest() async {}

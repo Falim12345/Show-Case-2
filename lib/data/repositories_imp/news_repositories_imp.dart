@@ -18,21 +18,24 @@ class NewsRepositoriesImp implements NewsRepository {
         apiConfig = GetIt.I<ApiNewsConfig>();
 
   @override
-  Future<Response<Map<String, dynamic>>> getNews(String country) async {
+  Future<NewsArticle> getNews(String country) async {
     try {
-      Response<Map<String, dynamic>> response =
-          await dio.get<Map<String, dynamic>>(
+      Response response = await dio.get(
         apiConfig.newsCurl,
         queryParameters: {"country": country},
         options: Options(
           headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
         ),
       );
-      print(response.realUri);
+      print(response.runtimeType);
       if (response.statusCode == 200) {
-        return response;
+        // Парсим ответ в объект типа NewsArticle и возвращаем его
+        NewsArticle newsArticle =
+            newsArticleFromJson(json.encode(response.data));
+        return newsArticle;
       } else {
-        throw Exception('Error ${response.statusCode}');
+        // Если ответ от сервера не 200, бросаем ошибку
+        throw 'Failed to load news';
       }
     } catch (e) {
       throw ('$e');
@@ -51,7 +54,6 @@ class NewsRepositoriesImp implements NewsRepository {
           headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
         ),
       );
-      print(response.realUri);
       if (response.statusCode == 200) {
         return response;
       } else {
