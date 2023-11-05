@@ -8,18 +8,13 @@ void main() async {
   SetapDependebciesImp().setapDependebcies();
   runApp(const MyApp());
   testtest();
-  // Получаем новости из API
-  NewsArticle news = await NewsRepositoriesImp(dio: Dio()).getNews("us");
+  NewsArticle news =
+      await NewsRepositoriesImp(dio: Dio()).getNews(country: 'us');
 
-  // Выводим значения полей объекта NewsArticle в консоль
-  print("Status: ${news.status}");
-  print("Total Results: ${news.totalResults}");
-
-  // Выводим значения полей каждой статьи в консоль
   for (Article article in news.articles) {
     // print("Source Name: ${article.source.name}");
     // print("Author: ${article.author ?? 'N/A'}");
-    print("Title: ${article.title}");
+    //print("Title: ${article.title}");
     // print("Description: ${article.description ?? 'N/A'}");
     // print("URL: ${article.url}");
     // print("URL to Image: ${article.urlToImage ?? 'N/A'}");

@@ -24,13 +24,16 @@ class NewsArticle {
         status: json["status"],
         totalResults: json["totalResults"],
         articles: List<Article>.from(
-            json["articles"].map((x) => Article.fromJson(x))),
+          json["articles"].map((x) => Article.fromJson(x)),
+        ),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "totalResults": totalResults,
-        "articles": List<dynamic>.from(articles.map((x) => x.toJson())),
+        "articles": List<dynamic>.from(
+          articles.map((x) => x.toJson()),
+        ),
       };
 }
 
