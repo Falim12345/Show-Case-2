@@ -1,44 +1,59 @@
-// ignore_for_file: avoid_print
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_showcase_2/data/model/news_model.dart';
 import 'package:flutter_showcase_2/domain/repositories/news_repository.dart';
 import 'package:get_it/get_it.dart';
+import 'package:logger/logger.dart';
 
 import '../../util/api_config.dart';
 
 class NewsRepositoriesImp implements NewsRepository {
   final Dio dio;
   final ApiNewsConfig apiConfig;
+  var logger = Logger();
 
   NewsRepositoriesImp({required Dio dio})
       : dio = GetIt.I<Dio>(),
         apiConfig = GetIt.I<ApiNewsConfig>();
 
   @override
-  Future<Response<Map<String, dynamic>>> getNews(String country) async {
+  Future<NewsArticle> getNews({
+    required String country,
+  }) async {
     try {
-      Response<Map<String, dynamic>> response =
-          await dio.get<Map<String, dynamic>>(
+      Response response = await dio.get(
         apiConfig.newsCurl,
         queryParameters: {"country": country},
         options: Options(
           headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
         ),
       );
-      print(response.realUri);
+      logger.d('Response status code: ${response.statusCode}');
       if (response.statusCode == 200) {
-        return response;
+        // Парсим ответ в объект типа NewsArticle и возвращаем его
+        NewsArticle newsArticle = newsArticleFromJson(
+          json.encode(response.data),
+        );
+        return newsArticle;
       } else {
-        throw Exception('Error ${response.statusCode}');
+        logger.e('Failed to load news: ${response.statusCode}');
+
+        throw 'Failed to load news';
       }
     } catch (e) {
+      logger.e('Error: $e');
       throw ('$e');
     }
   }
 
   @override
-  Future<Response<Map<String, dynamic>>> getSearchNews(
-      String q, String datefrom, String sortBy) async {
+  Future<NewsArticle> getSearchNews(
+      {required String q,
+      required String datefrom,
+      required String sortBy,
+      required int pageSize,
+      required int page}) async {
     try {
       Response<Map<String, dynamic>> response =
           await dio.get<Map<String, dynamic>>(
@@ -48,13 +63,19 @@ class NewsRepositoriesImp implements NewsRepository {
           headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
         ),
       );
-      print(response.realUri);
+      logger.d('Response status code: ${response.statusCode}');
+
       if (response.statusCode == 200) {
-        return response;
+        NewsArticle newsArticle = newsArticleFromJson(
+          json.encode(response.data),
+        );
+        return newsArticle;
       } else {
+        logger.e('Failed to load news: ${response.statusCode}');
         throw Exception('Error ${response.statusCode},${response.realUri}');
       }
     } catch (e) {
+      logger.e('Error: $e');
       throw ('$e');
     }
   }
