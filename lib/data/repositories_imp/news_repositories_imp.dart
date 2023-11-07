@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_showcase_2/core/error/failure.dart';
 import 'package:flutter_showcase_2/data/model/news_model.dart';
 import 'package:flutter_showcase_2/domain/repositories/news_repository.dart';
 import 'package:get_it/get_it.dart';
@@ -18,7 +20,7 @@ class NewsRepositoriesImp implements NewsRepository {
         apiConfig = GetIt.I<ApiNewsConfig>();
 
   @override
-  Future<NewsArticle> getNews({
+  Future<Either<Failure, NewsArticle>> getNews({
     required String country,
   }) async {
     try {
@@ -35,20 +37,17 @@ class NewsRepositoriesImp implements NewsRepository {
         NewsArticle newsArticle = newsArticleFromJson(
           json.encode(response.data),
         );
-        return newsArticle;
+        return Right(newsArticle);
       } else {
-        logger.e('Failed to load news: ${response.statusCode}');
-
-        throw 'Failed to load news';
+        return Left(Failure.server(message: 'Failed to load news'));
       }
     } catch (e) {
-      logger.e('Error: $e');
-      throw ('$e');
+      return Left(Failure.server(message: 'Error: $e'));
     }
   }
 
   @override
-  Future<NewsArticle> getSearchNews(
+  Future<Either<Failure, NewsArticle>> getSearchNews(
       {required String q,
       required String datefrom,
       required String sortBy,
@@ -69,14 +68,14 @@ class NewsRepositoriesImp implements NewsRepository {
         NewsArticle newsArticle = newsArticleFromJson(
           json.encode(response.data),
         );
-        return newsArticle;
+        return Right(newsArticle);
       } else {
         logger.e('Failed to load news: ${response.statusCode}');
-        throw Exception('Error ${response.statusCode},${response.realUri}');
+        return Left(Failure.server(message: 'Failed to load news'));
       }
     } catch (e) {
       logger.e('Error: $e');
-      throw ('$e');
+      return Left(Failure.server(message: 'Error: $e'));
     }
   }
 }
