@@ -3,14 +3,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/core/error/failure.dart';
 import 'package:flutter_showcase_2/data/model/news_model.dart';
+import 'package:flutter_showcase_2/data/repositories_imp/location_rep_imp.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
 import 'package:flutter_showcase_2/domain/entities/setap_dependencies.dart';
+import 'package:geolocator/geolocator.dart';
 
 void main() async {
-  SetapDependebciesImp().setapDependebcies();
-  runApp(const MyApp());
-  testtest();
+  SetupDependenciesImp().setupDependencies();
 
+  runApp(const MyApp());
   final Either<Failure, NewsArticle> newsEither =
       await NewsRepositoriesImp(dio: Dio()).getNews(country: 'us');
 
@@ -33,6 +34,8 @@ void main() async {
       }
     },
   );
+  var loc = await LocationRepositoryImp().getLocation();
+  print('Location: ${loc.latitude}, ${loc.longitude}');
 }
 
 class MyApp extends StatelessWidget {
@@ -44,4 +47,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void testtest() async {}
+// Future<void> _getCurrentLocation() async {
+//   Position position = await Geolocator.getCurrentPosition(
+//       desiredAccuracy: LocationAccuracy.high);
+
+//   print('Широта: ${position.latitude}');
+//   print('Долгота: ${position.longitude}');
+// }
