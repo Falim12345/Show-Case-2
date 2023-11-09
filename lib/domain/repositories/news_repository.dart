@@ -1,14 +1,15 @@
-import 'package:dio/dio.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_showcase_2/core/error/failure.dart';
 import 'package:flutter_showcase_2/data/model/news_model.dart';
 
 abstract class NewsRepository {
-  getSearchNews(
+  Future<Either<Failure, NewsArticle>> getSearchNews(
       {required String q,
       required String datefrom,
       required String sortBy,
       required int pageSize,
       required int page});
-  Future<NewsArticle> getNews({
+  Future<Either<Failure, NewsArticle>> getNews({
     required String country,
   });
 }
