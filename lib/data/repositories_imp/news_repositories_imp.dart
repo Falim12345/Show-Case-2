@@ -15,7 +15,7 @@ class NewsRepositoriesImp implements NewsRepository {
   final ApiNewsConfig apiConfig;
   var logger = Logger();
 
-  NewsRepositoriesImp({required Dio dio})
+  NewsRepositoriesImp()
       : dio = GetIt.I<Dio>(),
         apiConfig = GetIt.I<ApiNewsConfig>();
 
@@ -31,7 +31,8 @@ class NewsRepositoriesImp implements NewsRepository {
           headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
         ),
       );
-      logger.d('Response status code: ${response.statusCode}');
+      logger.d(
+          '###NEWS###Response status code: ${response.statusCode},${response.runtimeType}');
       if (response.statusCode == 200) {
         // Парсим ответ в объект типа NewsArticle и возвращаем его
         NewsArticle newsArticle = newsArticleFromJson(
@@ -62,7 +63,7 @@ class NewsRepositoriesImp implements NewsRepository {
           headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
         ),
       );
-      logger.d('Response status code: ${response.statusCode}');
+      logger.d('###SEARCH NEWS###Response status code: ${response.statusCode}');
 
       if (response.statusCode == 200) {
         NewsArticle newsArticle = newsArticleFromJson(

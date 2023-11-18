@@ -11,8 +11,8 @@ class GetNewsUseCase extends UseCase<Either<Failure, NewsArticle>, String> {
       : _newsRepository = newsRepository;
 
   @override
-  Future<Either<Failure, NewsArticle>> call(String country) async {
-    return await _newsRepository.getNews(country: country);
+  Future<Either<Failure, NewsArticle>> call(String params) async {
+    return await _newsRepository.getNews(country: params);
   }
 }
 
