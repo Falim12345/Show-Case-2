@@ -10,7 +10,7 @@ class GeocoderApiConfig {
       'https://api.opencagedata.com/geocode/v1/json';
 }
 
-class WaatherApiConfig {
-  final apiK = '2d92e6160501400b923123326230511';
-  final weatherCurl = 'https://api.weatherapi.com/v1';
+class WeatherApiConfig {
+  final String apiKey = '2d92e6160501400b923123326230511';
+  final String weatherCurl = 'http://api.weatherapi.com/v1/current.json';
 }

@@ -1,4 +1,4 @@
-import 'package:flutter_showcase_2/data/data_source/geolocator_location_data_source.dart';
+import 'package:flutter_showcase_2/data/data_source/locator_location_data_source_imp.dart';
 import 'package:flutter_showcase_2/domain/entities/location.dart';
 import 'package:flutter_showcase_2/domain/entities/setap_dependencies.dart';
 import 'package:flutter_showcase_2/domain/repositories/location_rep.dart';

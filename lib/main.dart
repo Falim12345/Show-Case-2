@@ -1,18 +1,17 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/core/error/failure.dart';
-import 'package:flutter_showcase_2/data/model/news_model.dart';
-import 'package:flutter_showcase_2/data/repositories_imp/geocoder_rep_imp.dart';
-import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
+import 'package:flutter_showcase_2/data/data_source/weather_data_source_imp.dart';
+import 'package:flutter_showcase_2/data/model/weather_model.dart';
+import 'package:flutter_showcase_2/data/repositories_imp/location_rep_imp.dart';
+import 'package:flutter_showcase_2/data/repositories_imp/weather_rep_imp.dart';
 import 'package:flutter_showcase_2/domain/entities/setap_dependencies.dart';
+import 'package:flutter/material.dart';
 
 void main() async {
   SetupDependenciesImp().setupDependencies();
 
   runApp(const MyApp());
-  var test = await GeocoderRepImp().getCoutryCode();
-  print(test);
+//  var test = await GeocoderRepImp().getCoutryCode();
 
   // final Either<Failure, NewsArticle> newsEither =
   //     await NewsRepositoriesImp().getNews(country: 'us');
@@ -41,6 +40,9 @@ void main() async {
   // var test = await GeocoderDataSource().getCountryByCoordinates();
   // print(test);
   // print(test.runtimeType);
+
+  Either<Failure, WeatherModel> ewew = await WeatherRepImp().getWeather();
+  ewew.fold((failure) => print(failure), (weather) => print(weather.current));
 }
 
 class MyApp extends StatelessWidget {
@@ -51,11 +53,3 @@ class MyApp extends StatelessWidget {
     return const MaterialApp();
   }
 }
-
-// Future<void> _getCurrentLocation() async {
-//   Position position = await Geolocator.getCurrentPosition(
-//       desiredAccuracy: LocationAccuracy.high);
-
-//   print('Широта: ${position.latitude}');
-//   print('Долгота: ${position.longitude}');
-// }
