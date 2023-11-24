@@ -1,7 +1,7 @@
 import 'package:flutter_showcase_2/domain/interfaces/location_data_sourse.dart';
 import 'package:geolocator/geolocator.dart';
 
-class GeoLocatorLocationDataSource implements LocationDataSourse {
+class LocatorLocationDataSource implements LocationDataSourse {
   @override
   Future<Position> getCurrentPosition() async {
     return await Geolocator.getCurrentPosition(

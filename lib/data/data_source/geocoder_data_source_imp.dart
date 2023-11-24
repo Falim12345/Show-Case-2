@@ -8,18 +8,18 @@ import 'package:flutter_showcase_2/util/api_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
-class GeocoderDataSource implements GeocodingData {
+class GeocoderDataSourceImp implements GeocodingDataSource {
   final Dio dio;
   final LocationRepositoryImp locationRepository;
   final GeocoderApiConfig geocoder;
   var logger = Logger();
 
-  GeocoderDataSource()
+  GeocoderDataSourceImp()
       : dio = GetIt.I<Dio>(),
         locationRepository = GetIt.I<LocationRepositoryImp>(),
         geocoder = GetIt.I<GeocoderApiConfig>();
   @override
-  Future<Either<Failure, Response>> getCountryByCoordinates() async {
+  Future<Either<Failure, Response<dynamic>>> getCountryByCoordinates() async {
     Location location = await locationRepository.getLocation();
     try {
       Response response = await dio.get(

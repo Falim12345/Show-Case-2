@@ -16,7 +16,6 @@ class WeatherRepImp implements WeatherRep {
     try {
       Either<Failure, Response> response =
           await weatherDataSourseImp.getWeatherByCoordinates();
-      print(response);
       return response.fold((failure) => throw Exception(failure.message),
           (response) {
         WeatherModel weatherData =
@@ -24,7 +23,7 @@ class WeatherRepImp implements WeatherRep {
         return Right(weatherData);
       });
     } catch (e) {
-      throw Exception("Ошибка при получении погоды: $e");
+      throw Left(Failure.connection(message: '$e'));
     }
   }
 }

@@ -4,23 +4,24 @@
 
 import 'dart:convert';
 
-NewsArticle newsArticleFromJson(String str) =>
-    NewsArticle.fromJson(json.decode(str));
+NewsArticleModel newsArticleFromJson(String str) =>
+    NewsArticleModel.fromJson(json.decode(str));
 
-String newsArticleToJson(NewsArticle data) => json.encode(data.toJson());
+String newsArticleToJson(NewsArticleModel data) => json.encode(data.toJson());
 
-class NewsArticle {
+class NewsArticleModel {
   String status;
   int totalResults;
   List<Article> articles;
 
-  NewsArticle({
+  NewsArticleModel({
     required this.status,
     required this.totalResults,
     required this.articles,
   });
 
-  factory NewsArticle.fromJson(Map<String, dynamic> json) => NewsArticle(
+  factory NewsArticleModel.fromJson(Map<String, dynamic> json) =>
+      NewsArticleModel(
         status: json["status"],
         totalResults: json["totalResults"],
         articles: List<Article>.from(

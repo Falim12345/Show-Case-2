@@ -19,7 +19,7 @@ class WeatherDataSourseImp implements WeatherDataSourse {
         getLocationUseCase = GetIt.I<GetLocationUseCase>();
 
   @override
-  Future<Either<Failure, Response>> getWeatherByCoordinates() async {
+  Future<Either<Failure, Response<dynamic>>> getWeatherByCoordinates() async {
     Location location = await getLocationUseCase.call(null);
     try {
       Response response =
