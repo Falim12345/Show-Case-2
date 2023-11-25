@@ -7,26 +7,26 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
 class NewsDataSoursImp implements NewsDataSource {
-  final Dio dio;
-  final ApiNewsConfig apiConfig;
-  var logger = Logger();
+  final Dio _dio;
+  final ApiNewsConfig _apiConfig;
+  final _logger = Logger();
 
   NewsDataSoursImp()
-      : dio = GetIt.I<Dio>(),
-        apiConfig = GetIt.I<ApiNewsConfig>();
+      : _dio = GetIt.I<Dio>(),
+        _apiConfig = GetIt.I<ApiNewsConfig>();
 
   @override
   Future<Either<Failure, Response<dynamic>>> getNews(
       {required String country}) async {
     try {
-      Response response = await dio.get(
-        apiConfig.newsCurl,
+      Response response = await _dio.get(
+        _apiConfig.newsCurl,
         queryParameters: {"country": country},
         options: Options(
-          headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
+          headers: {'Authorization': 'Bearer ${_apiConfig.apiKey}'},
         ),
       );
-      logger.d(
+      _logger.d(
           '###NEWS###Response status code: ${response.statusCode},${response.runtimeType}');
       return Right(response);
     } catch (e) {
@@ -43,18 +43,19 @@ class NewsDataSoursImp implements NewsDataSource {
       required int page}) async {
     try {
       Response<Map<String, dynamic>> response =
-          await dio.get<Map<String, dynamic>>(
-        apiConfig.searchNewsCurl,
+          await _dio.get<Map<String, dynamic>>(
+        _apiConfig.searchNewsCurl,
         queryParameters: {"q": q, "datefrom": datefrom, "sortBy": sortBy},
         options: Options(
-          headers: {'Authorization': 'Bearer ${apiConfig.apiKey}'},
+          headers: {'Authorization': 'Bearer ${_apiConfig.apiKey}'},
         ),
       );
-      logger.d('###SEARCH NEWS###Response status code: ${response.statusCode}');
+      _logger
+          .d('###SEARCH NEWS###Response status code: ${response.statusCode}');
 
       return Right(response);
     } catch (e) {
-      logger.e('Error: $e');
+      _logger.e('Error: $e');
       return Left(Failure.server(message: 'Error: $e'));
     }
   }

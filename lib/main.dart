@@ -1,11 +1,5 @@
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_showcase_2/core/error/failure.dart';
 import 'package:flutter_showcase_2/core/setap_dependencies.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_showcase_2/data/data_source/news_data_source.dart';
-import 'package:flutter_showcase_2/data/model/news_model.dart';
-import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
 
 void main() async {
   SetupDependenciesImp().setupDependencies();
@@ -63,13 +57,13 @@ void main() async {
   //   }
   // });
 
-  Either<Failure, NewsArticleModel> test =
-      await NewsRepositoriesImp().getSearchNews();
-  test.fold((failure) => print(failure), (news) {
-    for (Article article in news.articles) {
-      print("Source Name: ${article.title}");
-    }
-  });
+  // Either<Failure, NewsArticleModel> test =
+  //     await NewsRepositoriesImp().getSearchNews();
+  // test.fold((failure) => print(failure), (news) {
+  //   for (Article article in news.articles) {
+  //     print("Source Name: ${article.title}");
+  //   }
+  // });
 }
 
 class MyApp extends StatelessWidget {

@@ -9,24 +9,25 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
 class GeocoderDataSourceImp implements GeocodingDataSource {
-  final Dio dio;
-  final LocationRepositoryImp locationRepository;
-  final GeocoderApiConfig geocoder;
+  final Dio _dio;
+  final LocationRepositoryImp _locationRepository;
+  final GeocoderApiConfig _geocoder;
   var logger = Logger();
 
   GeocoderDataSourceImp()
-      : dio = GetIt.I<Dio>(),
-        locationRepository = GetIt.I<LocationRepositoryImp>(),
-        geocoder = GetIt.I<GeocoderApiConfig>();
+      : _dio = GetIt.I<Dio>(),
+        _locationRepository = GetIt.I<LocationRepositoryImp>(),
+        _geocoder = GetIt.I<GeocoderApiConfig>();
+
   @override
   Future<Either<Failure, Response<dynamic>>> getCountryByCoordinates() async {
-    Location location = await locationRepository.getLocation();
+    Location location = await _locationRepository.getLocation();
     try {
-      Response response = await dio.get(
-        geocoder.reverseGeocodingCurl,
+      Response response = await _dio.get(
+        _geocoder.reverseGeocodingCurl,
         queryParameters: {
           "q": "${location.latitude},${location.longitude}",
-          "key": geocoder.apiKey,
+          "key": _geocoder.apiKey,
         },
       );
       logger.d(

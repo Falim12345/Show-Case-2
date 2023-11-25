@@ -8,13 +8,13 @@ import 'package:flutter_showcase_2/domain/repositories/geocoding_rep.dart';
 import 'package:get_it/get_it.dart';
 
 class GeocoderRepImp implements GeocoderRepository {
-  GeocoderDataSourceImp geocoderDataSource;
-  GeocoderRepImp() : geocoderDataSource = GetIt.I<GeocoderDataSourceImp>();
+  final GeocoderDataSourceImp _geocoderDataSource;
+  GeocoderRepImp() : _geocoderDataSource = GetIt.I<GeocoderDataSourceImp>();
 
   @override
   Future<Either<Failure, GeodataModel>> getCoutryCode() async {
     try {
-      var response = await geocoderDataSource.getCountryByCoordinates();
+      var response = await _geocoderDataSource.getCountryByCoordinates();
       return response.fold(
         (failure) => throw Exception(failure.message),
         (response) {

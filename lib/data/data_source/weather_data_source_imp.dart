@@ -9,22 +9,22 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
 class WeatherDataSourseImp implements WeatherDataSourse {
-  final Dio dio;
-  final WeatherApiConfig weatherApiConfig;
-  final GetLocationUseCase getLocationUseCase;
+  final Dio _dio;
+  final WeatherApiConfig _weatherApiConfig;
+  final GetLocationUseCase _getLocationUseCase;
   var logger = Logger();
   WeatherDataSourseImp()
-      : dio = GetIt.I<Dio>(),
-        weatherApiConfig = GetIt.I<WeatherApiConfig>(),
-        getLocationUseCase = GetIt.I<GetLocationUseCase>();
+      : _dio = GetIt.I<Dio>(),
+        _weatherApiConfig = GetIt.I<WeatherApiConfig>(),
+        _getLocationUseCase = GetIt.I<GetLocationUseCase>();
 
   @override
   Future<Either<Failure, Response<dynamic>>> getWeatherByCoordinates() async {
-    Location location = await getLocationUseCase.call(null);
+    Location location = await _getLocationUseCase.call(null);
     try {
       Response response =
-          await dio.get(weatherApiConfig.weatherCurl, queryParameters: {
-        "key": weatherApiConfig.apiKey,
+          await _dio.get(_weatherApiConfig.weatherCurl, queryParameters: {
+        "key": _weatherApiConfig.apiKey,
         "q": "${location.latitude},${location.longitude}",
       });
       logger.d(
