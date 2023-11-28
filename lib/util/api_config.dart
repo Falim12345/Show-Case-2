@@ -4,6 +4,13 @@ class ApiNewsConfig {
   final String newsCurl = 'https://newsapi.org/v2/top-headlines';
 }
 
-class Geocoder {
+class GeocoderApiConfig {
   final String apiKey = 'a3b355c0e0d44ef5a5587f62ab0dcc25';
+  final String reverseGeocodingCurl =
+      'https://api.opencagedata.com/geocode/v1/json';
+}
+
+class WeatherApiConfig {
+  final String apiKey = '2d92e6160501400b923123326230511';
+  final String weatherCurl = 'http://api.weatherapi.com/v1/current.json';
 }
