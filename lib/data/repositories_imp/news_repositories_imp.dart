@@ -14,10 +14,11 @@ class NewsRepositoriesImp implements NewsRepository {
   NewsRepositoriesImp() : _newsDataSoursImp = GetIt.I<NewsDataSoursImp>();
 
   @override
-  Future<Either<Failure, NewsArticleModel>> getNews() async {
+  Future<Either<Failure, NewsArticleModel>> getNews(
+      {required String country}) async {
     try {
       Either<Failure, Response> response =
-          await _newsDataSoursImp.getNews(country: 'us');
+          await _newsDataSoursImp.getNews(country: country);
       return response
           .fold((failure) => Left(Failure.server(message: 'Error: $failure')),
               (response) {
@@ -31,15 +32,20 @@ class NewsRepositoriesImp implements NewsRepository {
   }
 
   @override
-  Future<Either<Failure, NewsArticleModel>> getSearchNews() async {
+  Future<Either<Failure, NewsArticleModel>> getSearchNews(
+      {required String q,
+      required String datefrom,
+      required String sortBy,
+      required int pageSize,
+      required int page}) async {
     try {
       Either<Failure, Response> response =
           await _newsDataSoursImp.getSearchNews(
-              q: 'Apple',
-              datefrom: "2023-10-01",
-              sortBy: 'popularity',
-              pageSize: 1,
-              page: 2);
+              q: q,
+              datefrom: datefrom,
+              sortBy: sortBy,
+              pageSize: pageSize,
+              page: page);
       return response
           .fold((failure) => Left(Failure.server(message: 'Error: $failure')),
               (response) {
