@@ -1,7 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage()
 class SecondOnbording extends StatefulWidget {
   const SecondOnbording({super.key});
 

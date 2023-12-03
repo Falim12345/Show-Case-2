@@ -27,12 +27,6 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OnboardingPage(),
       );
     },
-    SecondOnbording.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const SecondOnbording(),
-      );
-    },
   };
 }
 
@@ -60,20 +54,6 @@ class OnboardingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'OnboardingRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [SecondOnbording]
-class SecondOnbording extends PageRouteInfo<void> {
-  const SecondOnbording({List<PageRouteInfo>? children})
-      : super(
-          SecondOnbording.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SecondOnbording';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
