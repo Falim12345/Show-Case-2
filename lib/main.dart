@@ -1,11 +1,16 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_showcase_2/core/setap_dependencies.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_showcase_2/firebase_options.dart';
 import 'package:flutter_showcase_2/presentation/router/router.dart';
 
-void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SetupDependenciesImp().setupDependencies();
   runApp(MyApp());
 }

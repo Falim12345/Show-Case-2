@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_showcase_2/presentation/pages/home_page.dart';
-import 'package:flutter_showcase_2/presentation/pages/onboarding.dart';
+import 'package:flutter_showcase_2/presentation/pages/onboarding/onboarding1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'router.gr.dart';
