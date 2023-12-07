@@ -35,7 +35,10 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         if (isFirstRun)
           AutoRoute(page: OnboardingRoute.page, path: '/', children: [
-            AutoRoute(page: HomeRoute.page, path: 'home'),
+            AutoRoute(
+              page: HomeRoute.page,
+              path: 'home',
+            ),
           ]),
         if (!isFirstRun)
           AutoRoute(page: HomeRoute.page, path: '/', children: []),
