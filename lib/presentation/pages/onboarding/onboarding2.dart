@@ -1,18 +1,33 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-@RoutePage()
-class Fsdfafasgsagvsafvcacvas extends StatefulWidget {
-  const Fsdfafasgsagvsafvcacvas({super.key});
+class OnboardingPageTwo extends StatefulWidget {
+  const OnboardingPageTwo({super.key});
 
   @override
-  State<Fsdfafasgsagvsafvcacvas> createState() =>
-      _FsdfafasgsagvsafvcacvasState();
+  State<OnboardingPageTwo> createState() => _OnboardingPageTwoState();
 }
 
-class _FsdfafasgsagvsafvcacvasState extends State<Fsdfafasgsagvsafvcacvas> {
+class _OnboardingPageTwoState extends State<OnboardingPageTwo> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold(
+        body: Column(
+      children: [
+        Image(
+          image: AssetImage('lib/assets/pexels-photomix-company-242492.png'),
+          width: 428,
+          height: 584,
+        ),
+        Row(
+          children: [
+            SizedBox(
+              width: 428,
+              height: 212,
+              child: Text('dfgdsgdsgsdgdsgsgdsg'),
+            ),
+          ],
+        )
+      ],
+    ));
   }
 }
