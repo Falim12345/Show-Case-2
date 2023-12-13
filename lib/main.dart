@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_showcase_2/core/setap_dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/firebase_options.dart';
+import 'package:flutter_showcase_2/presentation/pages/home_page.dart';
 import 'package:flutter_showcase_2/presentation/pages/onboarding/onboarding1.dart';
 import 'package:flutter_showcase_2/presentation/pages/onboarding/onboarding2.dart';
 
@@ -30,8 +31,21 @@ class _MyAppState extends State<MyApp> {
           primaryColor: Colors.blue, scaffoldBackgroundColor: Colors.white),
       dark: ThemeData(primaryColor: Colors.blueGrey),
       initial: AdaptiveThemeMode.light,
-      builder: (ThemeData light, ThemeData dark) =>
-          const MaterialApp(routes: {}, home: OnboardingPage()),
+      builder: (ThemeData light, ThemeData dark) => MaterialApp(
+        home: Navigator(
+          pages: const [
+            MaterialPage(child: OnboardingPage()),
+            MaterialPage(child: OnboardingPageTwo()),
+            MaterialPage(child: HomePage()),
+          ],
+          onPopPage: (route, result) {
+            if (!route.didPop(result)) {
+              return false;
+            }
+            return true;
+          },
+        ),
+      ),
     );
   }
 }
