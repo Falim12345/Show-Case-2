@@ -46,7 +46,8 @@ dependencies:
   shared_preferences: ^2.2.2
   auto_route: ^7.8.4
   firebase_core: ^2.24.0
-  analyzer: 6.3.0
+  dots_indicator: ^3.0.0
+ 
 
 dev_dependencies:
   flutter_test:
@@ -75,7 +76,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/assets/photo_2023-12-02_17-53-29.jpg
-    - lib/assets/pexels-photomix-company-242492.png
+    - lib/assets/onbording1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
