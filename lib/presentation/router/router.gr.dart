@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OnboardingPage(),
       );
     },
+    SingupRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SingupPage(),
+      );
+    },
   };
 }
 
@@ -54,6 +60,20 @@ class OnboardingRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'OnboardingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SingupPage]
+class SingupRoute extends PageRouteInfo<void> {
+  const SingupRoute({List<PageRouteInfo>? children})
+      : super(
+          SingupRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SingupRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

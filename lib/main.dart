@@ -2,7 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_showcase_2/core/setap_dependencies.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_showcase_2/firebase_options.dart';
+import 'package:flutter_showcase_2/util/firebase_options.dart';
 import 'package:flutter_showcase_2/presentation/router/router.dart';
 
 void main() {
