@@ -1,9 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_showcase_2/presentation/router/router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-@RoutePage()
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
@@ -28,73 +25,70 @@ class _OnboardingPageState extends State<OnboardingPage> {
             physics: const NeverScrollableScrollPhysics(),
             controller: _pageController,
             children: [
-              Container(
-                color: Colors.white,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        flex: 6,
-                        child: Image.asset(
-                          'lib/assets/onbording1.png',
-                          fit: BoxFit.cover,
-                        )),
-                    const Expanded(
-                      flex: 4,
-                      child: Padding(
-                          padding: EdgeInsets.only(
-                            top: 24,
-                            left: 24,
-                            right: 24,
-                            bottom: 8,
-                          ),
-                          child: SizedBox(
-                            width: 428,
-                            height: 212,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      flex: 6,
+                      child: Image.asset(
+                        'lib/assets/onbording1.png',
+                        fit: BoxFit.cover,
+                      )),
+                  const Expanded(
+                    flex: 4,
+                    child: Padding(
+                        padding: EdgeInsets.only(
+                          top: 24,
+                          left: 24,
+                          right: 24,
+                          bottom: 8,
+                        ),
+                        child: SizedBox(
+                          width: 428,
+                          height: 212,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text('data',
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w700,
+                                        height: 0.06,
+                                        letterSpacing: 0.12,
+                                      )),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              SizedBox(
+                                width: 318,
+                                child: Row(
                                   children: [
-                                    Text('data',
-                                        style: TextStyle(
-                                          fontSize: 24,
+                                    Text(
+                                      'dsadsasafsafasffsadfsafa',
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Color(0xFF4E4B66),
                                           fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w700,
-                                          height: 0.06,
-                                          letterSpacing: 0.12,
-                                        )),
+                                          fontWeight: FontWeight.w400,
+                                          height: 0.09,
+                                          letterSpacing: 0.12),
+                                      softWrap: true,
+                                    ),
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                SizedBox(
-                                  width: 318,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'dsadsasafsafasffsadfsafa',
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            color: Color(0xFF4E4B66),
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w400,
-                                            height: 0.09,
-                                            letterSpacing: 0.12),
-                                        softWrap: true,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )),
-                    ),
-                  ],
-                ),
+                              ),
+                            ],
+                          ),
+                        )),
+                  ),
+                ],
               ),
               Container(
                 color: Colors.white,
@@ -292,7 +286,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         _currentPageIndex++;
       });
     } else {
-      AutoRouter.of(context).push(const SingupRoute());
+      // кОГДА НА ПОСЛЕДНЕМ ЄКРАНЕ НЕКСТ СТРАННИЦА
     }
     _pageController.animateToPage(
       _currentPageIndex,
