@@ -9,9 +9,9 @@ import 'core/setap_dependencies.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
   SetupDependenciesImp().setupDependencies();
 
   runApp(const MyApp());

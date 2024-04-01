@@ -17,7 +17,6 @@ class _SingupPageState extends State<SingupPage> {
           child: Column(
             children: [
               Align(
-                alignment: Alignment.topLeft,
                 child: Text(
                   'Hello!',
                   style: TextStyle(
