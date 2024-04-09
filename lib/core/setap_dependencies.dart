@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_showcase_2/data/UseCase/use_case_location.dart';
 import 'package:flutter_showcase_2/data/data_source/geocoder_data_source_imp.dart';
 import 'package:flutter_showcase_2/data/data_source/locator_location_data_source_imp.dart';
@@ -53,5 +54,7 @@ class SetupDependenciesImp {
 
     locator.registerLazySingleton<NewsRepositoriesImp>(
         () => NewsRepositoriesImp());
+
+    locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   }
 }

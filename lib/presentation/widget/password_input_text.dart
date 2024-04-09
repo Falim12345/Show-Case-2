@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
 
 class PassswordInputTextField extends StatefulWidget {
-  const PassswordInputTextField({super.key, required this.labelText});
+  const PassswordInputTextField({
+    super.key,
+    required this.labelText,
+    required this.onChanged,
+    required this.controller,
+  });
   final String labelText;
+  final ValueChanged<String>? onChanged;
+  final TextEditingController controller;
+
   @override
   State<PassswordInputTextField> createState() =>
       _PassswordInputTextFieldState();
@@ -12,6 +20,7 @@ class PassswordInputTextField extends StatefulWidget {
 class _PassswordInputTextFieldState extends State<PassswordInputTextField> {
   // Параметр для текста
   bool obscureText = true;
+  bool incorrectPassword = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +40,10 @@ class _PassswordInputTextFieldState extends State<PassswordInputTextField> {
           ),
           const SizedBox(height: 4),
           TextField(
+            controller: widget.controller,
+            onChanged: widget.onChanged,
             obscureText: obscureText,
-            textAlignVertical:
-                TextAlignVertical.top, // Выравнивание текста вверху
+            textAlignVertical: TextAlignVertical.top,
             decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color(0xFF3A3B3C),
@@ -50,9 +60,7 @@ class _PassswordInputTextFieldState extends State<PassswordInputTextField> {
                       obscureText = !obscureText;
                     });
                   },
-                )
-                // Устанавливаем границу для поля ввода
-                ),
+                )),
           ),
         ],
       ),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
 
 class AuthButton extends StatelessWidget {
-  const AuthButton({super.key, required this.labelText});
+  const AuthButton(
+      {super.key, required this.labelText, required this.onPressed});
 
-  final String labelText; // Параметр для текста
+  final String labelText;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class AuthButton extends StatelessWidget {
         Expanded(
           child: FloatingActionButton(
             backgroundColor: AppColors.primaryColor,
-            onPressed: () {},
+            onPressed: onPressed,
             child: Text(
               labelText,
               style: const TextStyle(color: AppColors.lightThemePrimaryColor),

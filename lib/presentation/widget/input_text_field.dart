@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
 
 class InputTextField extends StatelessWidget {
-  const InputTextField({super.key, required this.labelText});
-  final String labelText; // Параметр для текста
+  const InputTextField(
+      {super.key,
+      required this.labelText,
+      required this.onChanged,
+      required this.controller});
+  final String labelText;
+  final ValueChanged<String>? onChanged;
+  final TextEditingController controller; // Объявление контроллера
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +29,9 @@ class InputTextField extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           TextField(
-            textAlignVertical:
-                TextAlignVertical.top, // Выравнивание текста вверху
+            textAlignVertical: TextAlignVertical.top,
+            controller: controller,
+            onChanged: onChanged,
             decoration: InputDecoration(
               filled: true,
               fillColor: const Color(0xFF3A3B3C),
@@ -34,7 +41,6 @@ class InputTextField extends StatelessWidget {
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide.none),
-              // Устанавливаем границу для поля ввода
             ),
           ),
         ],

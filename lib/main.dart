@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_showcase_2/core/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/presentation/router/router.dart';
@@ -7,12 +8,13 @@ import 'package:flutter_showcase_2/util/firebase_options.dart';
 
 import 'core/setap_dependencies.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SetupDependenciesImp().setupDependencies();
+  await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
