@@ -1,11 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
+import 'package:flutter_showcase_2/core/validator.dart';
+import 'package:flutter_showcase_2/presentation/BloC/auth_bloc.dart';
+import 'package:flutter_showcase_2/presentation/BloC/events.dart';
 import 'package:flutter_showcase_2/presentation/widget/input_text_field.dart';
 import 'package:flutter_showcase_2/presentation/widget/logon_bottom.dart';
 import 'package:flutter_showcase_2/presentation/widget/password_input_text.dart';
-
-import '../../data/repositories_imp/fairbase_auth_rep_imp.dart';
 
 enum AuthMode { signup, login }
 
@@ -16,17 +17,21 @@ class SingupPage extends StatefulWidget {
   State<SingupPage> createState() => _SingupPageState();
 }
 
+String? _emailError;
+String? _passwordError;
+
 class _SingupPageState extends State<SingupPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final Validator _validator = Validator();
 
   AuthMode authMode = AuthMode.signup;
-  final AuthManager _authManager =
-      AuthManager(firebaseAuth: FirebaseAuth.instance);
   bool _isChecked = false;
 
   @override
   Widget build(BuildContext context) {
+    AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -82,14 +87,24 @@ class _SingupPageState extends State<SingupPage> {
                 const SizedBox(height: 35),
                 InputTextField(
                   labelText: 'Email',
-                  onChanged: (String value) {},
+                  onChanged: (String value) {
+                    setState(() {
+                      _emailError = _validator.validateEmail(value);
+                    });
+                  },
                   controller: usernameController,
+                  errorText: _emailError,
                 ),
                 const SizedBox(height: 31),
                 PassswordInputTextField(
                   labelText: 'Password',
-                  onChanged: (String value) {},
+                  onChanged: (String value) {
+                    setState(() {
+                      _passwordError = _validator.validatePassword(value);
+                    });
+                  },
                   controller: passwordController,
+                  errorText: _passwordError,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -120,10 +135,25 @@ class _SingupPageState extends State<SingupPage> {
                 AuthButton(
                   labelText: 'Signup',
                   onPressed: () {
-                    _authManager.onEmailAndPassword(
-                      email: usernameController.text,
-                      password: passwordController.text,
-                    );
+                    // Проверяем наличие ошибок валидации перед регистрацией пользователя
+                    String? emailError = _validator
+                        .validateEmail(usernameController.text.trim());
+                    String? passwordError = _validator
+                        .validatePassword(passwordController.text.trim());
+
+                    if (emailError != null || passwordError != null) {
+                      // Если есть ошибки валидации, обновляем состояние, чтобы отобразить ошибки
+                      setState(() {
+                        _emailError = emailError;
+                        _passwordError = passwordError;
+                      });
+                    } else {
+                      // Если ошибок нет, добавляем событие SignUpRequested
+                      authBloc.add(SignUpRequested(
+                        email: usernameController.text.trim(),
+                        password: passwordController.text.trim(),
+                      ));
+                    }
                   },
                 ),
                 const SizedBox(height: 6),
@@ -144,7 +174,9 @@ class _SingupPageState extends State<SingupPage> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            authBloc.add(FacebookSignInRequested());
+                          },
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -172,7 +204,9 @@ class _SingupPageState extends State<SingupPage> {
                                   'Google',
                                   style: TextStyle(color: Colors.black),
                                 ),
-                                onPressed: null,
+                                onPressed: () {
+                                  authBloc.add(GoogleSignInRequested());
+                                },
                               )
                             ],
                           )),

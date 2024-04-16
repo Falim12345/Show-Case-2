@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
 
 class InputTextField extends StatelessWidget {
-  const InputTextField(
-      {super.key,
-      required this.labelText,
-      required this.onChanged,
-      required this.controller});
+  const InputTextField({
+    super.key,
+    required this.labelText,
+    required this.onChanged,
+    required this.controller,
+    this.errorText,
+  });
   final String labelText;
   final ValueChanged<String>? onChanged;
   final TextEditingController controller; // Объявление контроллера
+  final String? errorText; // Добавляем параметр для отображения текста ошибки
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,7 @@ class InputTextField extends StatelessWidget {
             controller: controller,
             onChanged: onChanged,
             decoration: InputDecoration(
+              errorText: errorText,
               filled: true,
               fillColor: const Color(0xFF3A3B3C),
               border: OutlineInputBorder(

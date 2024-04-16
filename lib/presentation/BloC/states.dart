@@ -1,15 +1,22 @@
-import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../domain/interfaces/state.dart';
 
-class InitialState extends AppState {}
+class InitialState extends AppState {
+  @override
+  List<Object?> get props => [];
+}
 
-class LoadingState extends AppState {}
+class LoadingState extends AppState {
+  @override
+  List<Object?> get props => [];
+}
 
 class ErrorState extends AppState {
   final String errorMessage;
 
   ErrorState(this.errorMessage);
+
+  @override
+  List<Object?> get props => [errorMessage];
 }
 
 class EmptyState extends AppState {}
@@ -21,7 +28,11 @@ class DataState extends AppState {
 }
 
 class AuthenticatedState extends AppState {
-  final UserCredential userCredential;
+  @override
+  List<Object?> get props => [];
+}
 
-  AuthenticatedState(this.userCredential);
+class UnAuthenticatedState extends AppState {
+  @override
+  List<Object?> get props => [];
 }

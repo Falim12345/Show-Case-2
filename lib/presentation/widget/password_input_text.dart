@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
 
@@ -7,10 +8,12 @@ class PassswordInputTextField extends StatefulWidget {
     required this.labelText,
     required this.onChanged,
     required this.controller,
+    this.errorText,
   });
   final String labelText;
   final ValueChanged<String>? onChanged;
   final TextEditingController controller;
+  final String? errorText;
 
   @override
   State<PassswordInputTextField> createState() =>
@@ -45,6 +48,7 @@ class _PassswordInputTextFieldState extends State<PassswordInputTextField> {
             obscureText: obscureText,
             textAlignVertical: TextAlignVertical.top,
             decoration: InputDecoration(
+                errorText: widget.errorText,
                 filled: true,
                 fillColor: const Color(0xFF3A3B3C),
                 border: OutlineInputBorder(
