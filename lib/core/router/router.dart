@@ -1,9 +1,9 @@
 import 'package:flutter_showcase_2/presentation/pages/home_page.dart';
 import 'package:go_router/go_router.dart';
 
-import '../pages/onboarding/onboarding.dart';
-import '../pages/signuppage.dart';
-import '../router/routs.dart';
+import '../../presentation/pages/onboarding/onboarding.dart';
+import '../../presentation/pages/signuppage.dart';
+import 'routs.dart';
 
 final router = GoRouter(
   routes: [
