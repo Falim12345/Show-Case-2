@@ -34,3 +34,8 @@ class FacebookSignInRequested extends Event {
 class SignOutRequested extends Event {
   //When the user tries to log out from the system.
 }
+
+class FetchNewsEvent extends Event {
+  final String country;
+  FetchNewsEvent({required this.country});
+}

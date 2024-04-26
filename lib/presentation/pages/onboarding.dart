@@ -3,7 +3,7 @@ import 'package:flutter_showcase_2/core/router/router.dart';
 import 'package:flutter_showcase_2/core/router/routs.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../core/app_colors.dart';
+import '../../core/app_colors.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});

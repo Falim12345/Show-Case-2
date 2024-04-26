@@ -1,3 +1,5 @@
+import 'package:flutter_showcase_2/data/model/news_model.dart';
+
 import '../../domain/interfaces/state.dart';
 
 class InitialState extends AppState {
@@ -35,4 +37,10 @@ class AuthenticatedState extends AppState {
 class UnAuthenticatedState extends AppState {
   @override
   List<Object?> get props => [];
+}
+
+class NewsLoadedState extends AppState {
+  final List<Article> articles;
+
+  NewsLoadedState({required this.articles});
 }
