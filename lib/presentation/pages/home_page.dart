@@ -50,17 +50,19 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar:
             BottomNavigationBar(items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, color: AppColors.primaryColor),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore),
+            icon: Icon(Icons.explore, color: AppColors.primaryColor),
             label: 'Explorer',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark_outline_sharp), label: 'Bookmarks'),
+              icon: Icon(Icons.bookmark_outline_sharp,
+                  color: AppColors.primaryColor),
+              label: 'Bookmarks'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person, color: AppColors.primaryColor),
             label: 'Profile',
           ),
         ]),
@@ -121,7 +123,11 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Lastet'),
-                  InkWell(onTap: () {}, child: const Text('See all'))
+                  InkWell(
+                      onTap: () {
+                        print(articles);
+                      },
+                      child: const Text('See all'))
                 ],
               ),
               const SizedBox(

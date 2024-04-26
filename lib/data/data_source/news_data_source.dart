@@ -35,12 +35,13 @@ class NewsDataSoursImp implements NewsDataSource {
   }
 
   @override
-  Future<Either<Failure, Response<dynamic>>> getSearchNews(
-      {required String q,
-      required String datefrom,
-      required String sortBy,
-      required int pageSize,
-      required int page}) async {
+  Future<Either<Failure, Response<dynamic>>> getSearchNews({
+    required String q,
+    required String datefrom,
+    required String sortBy,
+    required int pageSize,
+    required int page,
+  }) async {
     try {
       Response<Map<String, dynamic>> response =
           await _dio.get<Map<String, dynamic>>(

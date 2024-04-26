@@ -24,11 +24,22 @@ Future<void> main() async {
   NewsRepositoriesImp newsRepositoriesImp = NewsRepositoriesImp();
 
   var result = await newsRepositoriesImp.getNews(country: 'us');
-  result.fold((failutre) => null, (newsArticle) {
-    for (var article in newsArticle.articles) {
-      print(article.urlToImage); // Вывод содержимого каждой новости
-    }
-  });
+  result.fold(
+    (failure) => null,
+    (newsArticle) {
+      for (var article in newsArticle.articles) {
+        print('Source: ${article.source.name}');
+        print('Author: ${article.author}');
+        print('Title: ${article.title}');
+        print('Description: ${article.description}');
+        print('URL: ${article.url}');
+        print('URL to Image: ${article.urlToImage}');
+        print('Published At: ${article.publishedAt}');
+        print('Content: ${article.content}');
+        print('-----------------------');
+      }
+    },
+  );
   runApp(const MyApp());
 }
 

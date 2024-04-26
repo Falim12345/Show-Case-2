@@ -19,7 +19,7 @@ class NewsCarousel extends StatelessWidget {
         return NewsCard(article: articles[index]);
       },
       options: CarouselOptions(
-        height: 300, // Высота карточек
+        height: 280, // Высота карточек
         aspectRatio: 16 / 9, // Соотношение сторон карточек
         viewportFraction: 0.8, // Видимая часть карусели
         initialPage: 0, // Начальная страница
