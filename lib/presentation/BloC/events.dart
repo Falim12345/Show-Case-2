@@ -1,7 +1,6 @@
 import 'package:flutter_showcase_2/domain/interfaces/event.dart';
 
 class SignInRequested extends Event {
-  //This event will get triggered when the user requests to register the account. It takes two string parameters. email and password.
   final String email;
   final String password;
 
@@ -11,8 +10,6 @@ class SignInRequested extends Event {
 }
 
 class SignUpRequested extends Event {
-  //It will get fired when the user tries to log in with an email and password.
-
   final String email;
   final String password;
 

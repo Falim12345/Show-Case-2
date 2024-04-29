@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/fairbase_auth_rep_imp.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
 import 'package:flutter_showcase_2/presentation/BloC/auth_bloc.dart';
-import 'package:flutter_showcase_2/presentation/BloC/get_news_bloc.dart';
-import 'package:flutter_showcase_2/presentation/pages/home_page.dart';
 import 'package:flutter_showcase_2/presentation/pages/signuppage.dart';
 import 'package:flutter_showcase_2/core/router/router.dart';
 import 'package:flutter_showcase_2/util/firebase_options.dart';
@@ -58,10 +56,6 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(AuthRepositoryImp()),
           child: const SingupPage(),
-        ),
-        BlocProvider<GetNewsBloc>(
-          create: (context) => GetNewsBloc(NewsRepositoriesImp()),
-          child: const HomePage(),
         ),
       ],
       child: AdaptiveTheme(

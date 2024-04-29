@@ -43,7 +43,8 @@ class _HomePageState extends State<HomePage> {
     if (articles.isNotEmpty) {
       contentWidget = NewsCarousel(articles: articles);
     } else {
-      contentWidget = CircularProgressIndicator(); // или другой виджет загрузки
+      contentWidget =
+          const CircularProgressIndicator(); // или другой виджет загрузки
     }
     return SafeArea(
       child: Scaffold(
@@ -123,11 +124,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text('Lastet'),
-                  InkWell(
-                      onTap: () {
-                        print(articles);
-                      },
-                      child: const Text('See all'))
+                  InkWell(onTap: () {}, child: const Text('See all'))
                 ],
               ),
               const SizedBox(
