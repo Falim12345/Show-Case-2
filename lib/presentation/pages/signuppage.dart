@@ -135,20 +135,17 @@ class _SingupPageState extends State<SingupPage> {
                 AuthButton(
                   labelText: 'Signup',
                   onPressed: () {
-                    // Проверяем наличие ошибок валидации перед регистрацией пользователя
                     String? emailError = _validator
                         .validateEmail(usernameController.text.trim());
                     String? passwordError = _validator
                         .validatePassword(passwordController.text.trim());
 
                     if (emailError != null || passwordError != null) {
-                      // Если есть ошибки валидации, обновляем состояние, чтобы отобразить ошибки
                       setState(() {
                         _emailError = emailError;
                         _passwordError = passwordError;
                       });
                     } else {
-                      // Если ошибок нет, добавляем событие SignUpRequested
                       authBloc.add(SignUpRequested(
                         email: usernameController.text.trim(),
                         password: passwordController.text.trim(),
@@ -158,10 +155,8 @@ class _SingupPageState extends State<SingupPage> {
                 ),
                 const SizedBox(height: 6),
                 const Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .center, // выравнивание текста по центру горизонтально
-                  crossAxisAlignment: CrossAxisAlignment
-                      .center, // выравнивание текста по центру вертикально
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [Text('or continue with')],
                 ),
                 const SizedBox(height: 10),

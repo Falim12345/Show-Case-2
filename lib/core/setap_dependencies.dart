@@ -53,8 +53,7 @@ class SetupDependenciesImp {
     locator.registerLazySingleton<LocationRepositoryImp>(
         () => LocationRepositoryImp());
 
-    locator.registerLazySingleton<NewsRepositoriesImp>(
-        () => NewsRepositoriesImp());
+    locator.registerSingleton<NewsRepositoriesImp>(NewsRepositoriesImp());
 
     locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
 

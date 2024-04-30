@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_showcase_2/core/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/fairbase_auth_rep_imp.dart';
-import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
 import 'package:flutter_showcase_2/presentation/BloC/auth_bloc.dart';
+import 'package:flutter_showcase_2/presentation/BloC/news_bloc.dart';
+import 'package:flutter_showcase_2/presentation/pages/home_page.dart';
 import 'package:flutter_showcase_2/presentation/pages/signuppage.dart';
 import 'package:flutter_showcase_2/core/router/router.dart';
 import 'package:flutter_showcase_2/util/firebase_options.dart';
+// import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/setap_dependencies.dart';
 
@@ -19,25 +21,6 @@ Future<void> main() async {
   );
   SetupDependenciesImp().setupDependencies();
 
-  NewsRepositoriesImp newsRepositoriesImp = NewsRepositoriesImp();
-
-  var result = await newsRepositoriesImp.getNews(country: 'us');
-  result.fold(
-    (failure) => null,
-    (newsArticle) {
-      for (var article in newsArticle.articles) {
-        print('Source: ${article.source.name}');
-        print('Author: ${article.author}');
-        print('Title: ${article.title}');
-        print('Description: ${article.description}');
-        print('URL: ${article.url}');
-        print('URL to Image: ${article.urlToImage}');
-        print('Published At: ${article.publishedAt}');
-        print('Content: ${article.content}');
-        print('-----------------------');
-      }
-    },
-  );
   runApp(const MyApp());
 }
 
@@ -57,12 +40,23 @@ class _MyAppState extends State<MyApp> {
           create: (context) => AuthBloc(AuthRepositoryImp()),
           child: const SingupPage(),
         ),
+        BlocProvider<NewsBloc>(
+          create: (context) => NewsBloc(),
+          child: const HomePage(),
+        )
       ],
       child: AdaptiveTheme(
         light: lightTheme,
         dark: darkTheme,
         initial: AdaptiveThemeMode.dark,
         builder: (ThemeData light, ThemeData dark) => MaterialApp.router(
+          // localizationsDelegates: const [
+          //   S.delegate,
+          //   GlobalMaterialLocalizations.delegate,
+          //   GlobalWidgetsLocalizations.delegate,
+          //   GlobalCupertinoLocalizations.delegate,
+          // ],
+          // supportedLocales: S.delegate.supportedLocales,
           routerConfig: router,
           theme: light,
           darkTheme: dark,

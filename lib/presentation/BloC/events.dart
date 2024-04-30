@@ -34,5 +34,6 @@ class SignOutRequested extends Event {
 
 class FetchNewsEvent extends Event {
   final String country;
+
   FetchNewsEvent({required this.country});
 }

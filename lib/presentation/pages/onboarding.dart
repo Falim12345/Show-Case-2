@@ -238,7 +238,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   effect: const WormEffect(
                       dotColor: AppColors.inActiveDotColor,
                       activeDotColor: AppColors.primaryColor),
-                  // your preferred effect
                   onDotClicked: (index) {},
                 ),
               ),
@@ -253,12 +252,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                 ),
               ),
-              // const SizedBox(width: 6),
               SizedBox(
-                width: _currentPageIndex == 2
-                    ? 120.0
-                    : 80.0, // Установите разные значения ширины кнопки
-
+                width: _currentPageIndex == 2 ? 120.0 : 80.0,
                 child: FloatingActionButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6.0),
@@ -299,7 +294,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
       if (_currentPageIndex > 0) {
         _currentPageIndex--;
       } else {
-        // Scrolls to the previous page in the page controller. If already on the first page, does nothing.
         return;
       }
       _pageController.animateToPage(

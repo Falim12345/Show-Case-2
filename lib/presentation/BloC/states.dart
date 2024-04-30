@@ -43,4 +43,14 @@ class NewsLoadedState extends AppState {
   final List<Article> articles;
 
   NewsLoadedState({required this.articles});
+  @override
+  List<Object?> get props => [];
+}
+
+class AllNewsLoadedState extends AppState {
+  final List<Article> allArticles;
+
+  AllNewsLoadedState({required this.allArticles});
+  @override
+  List<Object?> get props => [];
 }

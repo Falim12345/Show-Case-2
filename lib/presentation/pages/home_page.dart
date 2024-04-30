@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
 import 'package:flutter_showcase_2/data/model/news_model.dart';
-import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
+import 'package:flutter_showcase_2/domain/interfaces/state.dart';
+import 'package:flutter_showcase_2/presentation/BloC/events.dart';
+import 'package:flutter_showcase_2/presentation/BloC/news_bloc.dart';
+import 'package:flutter_showcase_2/presentation/BloC/states.dart';
 import 'package:flutter_showcase_2/presentation/widget/news_carusel.dart';
 import 'package:flutter_showcase_2/presentation/widget/news_scroll.dart';
 import 'package:flutter_showcase_2/presentation/widget/search_bar.dart';
@@ -14,38 +18,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Article> articles = [];
-
   @override
   void initState() {
     super.initState();
-    loadNews();
-  }
 
-  void loadNews() {
-    NewsRepositoriesImp newsRepositoriesImp = NewsRepositoriesImp();
-    newsRepositoriesImp.getNews(country: 'us').then((result) {
-      result.fold(
-        (failure) => print("Failed to load news: $failure"),
-        (newsArticle) {
-          setState(() {
-            articles = newsArticle.articles;
-          });
-        },
-      );
-    });
+    context.read<NewsBloc>().add(FetchNewsEvent(country: 'us'));
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget contentWidget;
-
-    if (articles.isNotEmpty) {
-      contentWidget = NewsCarousel(articles: articles);
-    } else {
-      contentWidget =
-          const CircularProgressIndicator(); // или другой виджет загрузки
-    }
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar:
@@ -116,7 +97,18 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 16,
               ),
-              contentWidget,
+              BlocBuilder<NewsBloc, AppState>(
+                builder: (BuildContext context, state) {
+                  if (state is NewsLoadedState) {
+                    return NewsCarousel(articles: state.articles);
+                  } else if (state is ErrorState) {
+                    return Text('Error: ${state.errorMessage}');
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                },
+              ),
+              // contentWidget,
               const SizedBox(
                 height: 8,
               ),
@@ -130,7 +122,15 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 16,
               ),
-              NewsListView(articles: articles),
+              BlocBuilder<NewsBloc, AppState>(builder: (context, state) {
+                if (state is NewsLoadedState) {
+                  return NewsListView(articles: state.articles);
+                } else if (state is ErrorState) {
+                  return Text('Error: ${state.errorMessage}');
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              })
             ],
           ),
         ),
