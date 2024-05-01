@@ -27,6 +27,7 @@ class NewsCarousel extends StatelessWidget {
         autoPlay: true, // Автоматическая прокрутка
         autoPlayInterval:
             const Duration(seconds: 5), // Интервал автоматической прокрутки
+        autoPlayAnimationDuration: const Duration(milliseconds: 800),
         autoPlayCurve: Curves.fastOutSlowIn, // Кривая автоматической прокрутки
         // enlargeCenterPage: true, // Увеличивать центральную страницу
         scrollDirection: Axis.horizontal, // Направление прокрутки

@@ -9,11 +9,9 @@ import '../../domain/interfaces/state.dart';
 
 class NewsBloc extends Bloc<Event, AppState> {
   NewsBloc() : super(InitialState()) {
-    _fetchLastNews();
-  }
+    on<FetchNewsEvent>((event, emit) async {
+      emit(LoadingState());
 
-  void _fetchLastNews() {
-    return on<FetchNewsEvent>((event, emit) async {
       await GetIt.I<NewsRepositoriesImp>()
           .getNews(country: 'us')
           .then((result) {
@@ -22,10 +20,9 @@ class NewsBloc extends Bloc<Event, AppState> {
           (newsArticle) {
             final sortedArticles = newsArticle.articles.toList()
               ..sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
-            final limitedArticles = sortedArticles.length > 5
-                ? sortedArticles.sublist(0, 5)
-                : sortedArticles;
-            emit(NewsLoadedState(articles: limitedArticles));
+            emit(NewsLoadedState(
+                articles: sortedArticles,
+                sortedArticles: newsArticle.articles));
           },
         );
       });

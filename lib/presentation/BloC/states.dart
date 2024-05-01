@@ -40,17 +40,17 @@ class UnAuthenticatedState extends AppState {
 }
 
 class NewsLoadedState extends AppState {
-  final List<Article> articles;
+  final List<Article> articles, sortedArticles;
 
-  NewsLoadedState({required this.articles});
+  NewsLoadedState({
+    required this.articles,
+    required this.sortedArticles,
+  });
   @override
   List<Object?> get props => [];
 }
 
-class AllNewsLoadedState extends AppState {
-  final List<Article> allArticles;
-
-  AllNewsLoadedState({required this.allArticles});
+class RegistrethenState extends AppState {
   @override
   List<Object?> get props => [];
 }

@@ -12,7 +12,7 @@ class AuthBloc extends Bloc<Event, AppState> {
 
   AuthBloc(this._authRepositoryImp) : super(UnAuthenticatedState()) {
     on<SignUpRequested>((event, emit) async {
-      emit(LoadingState());
+      emit(RegistrethenState());
       _logger.d('Event: $event');
       try {
         await _authRepositoryImp.onEmailAndPassword(
@@ -24,7 +24,7 @@ class AuthBloc extends Bloc<Event, AppState> {
     });
 
     // on<SignInRequested>((event, emit) async {
-    //   emit(LoadingState());
+    //   emit(RegistrethenState());
     //   try {
     //     await _authRepositoryImp.onEmailAndPassword(
     //         email: event.email, password: event.password);
@@ -35,7 +35,7 @@ class AuthBloc extends Bloc<Event, AppState> {
     // });
 
     on<GoogleSignInRequested>((event, emit) async {
-      emit(LoadingState());
+      emit(RegistrethenState());
       _logger.d('Event: $event');
 
       try {
@@ -47,16 +47,5 @@ class AuthBloc extends Bloc<Event, AppState> {
       }
     });
 
-    on<FacebookSignInRequested>((event, emit) async {
-      emit(LoadingState());
-      _logger.d('Event: $event');
-      try {
-        await _authRepositoryImp.signInWithFacebook();
-        emit(AuthenticatedState());
-      } catch (e) {
-        emit(ErrorState(e.toString()));
-        emit(UnAuthenticatedState());
-      }
-    });
   }
 }

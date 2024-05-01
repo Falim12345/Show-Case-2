@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
-import 'package:flutter_showcase_2/data/model/news_model.dart';
 import 'package:flutter_showcase_2/domain/interfaces/state.dart';
 import 'package:flutter_showcase_2/presentation/BloC/events.dart';
 import 'package:flutter_showcase_2/presentation/BloC/news_bloc.dart';
@@ -18,6 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController searchController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               SizedBox(
                 width: 380,
-                height: 56,
+                height: 40,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -83,7 +83,15 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 16,
               ),
-              const CustomSearchBar(),
+              SearchBar(
+                hintText: 'Search for news',
+                controller: searchController,
+                padding: const MaterialStatePropertyAll<EdgeInsets>(
+                    EdgeInsets.symmetric(horizontal: 8.0)),
+                onTap: () {},
+                leading: const Icon(Icons.search),
+                trailing: const <Widget>[Icon(Icons.settings)],
+              ),
               const SizedBox(
                 height: 16,
               ),

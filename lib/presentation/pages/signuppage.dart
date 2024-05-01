@@ -169,9 +169,7 @@ class _SingupPageState extends State<SingupPage> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5)),
                           ),
-                          onPressed: () {
-                            authBloc.add(FacebookSignInRequested());
-                          },
+                          onPressed: () {},
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
