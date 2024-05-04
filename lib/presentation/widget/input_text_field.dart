@@ -11,9 +11,8 @@ class InputTextField extends StatelessWidget {
   });
   final String labelText;
   final ValueChanged<String>? onChanged;
-  final TextEditingController controller; // Объявление контроллера
-  final String? errorText; // Добавляем параметр для отображения текста ошибки
-
+  final TextEditingController controller;
+  final String? errorText;
   @override
   Widget build(BuildContext context) {
     return SizedBox(

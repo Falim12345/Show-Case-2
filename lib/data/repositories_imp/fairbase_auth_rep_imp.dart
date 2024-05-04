@@ -19,14 +19,9 @@ class AuthRepositoryImp {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('user_uid', credential.user!.uid);
       }
-
-      // print('User created with ID: ${credential.user?.uid}');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        // print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        // print('The account already exists for that email.');
-      }
+      } else if (e.code == 'email-already-in-use') {}
     } catch (e) {
       // print(e);
     }
@@ -51,25 +46,20 @@ class AuthRepositoryImp {
   }
 
   Future<UserCredential> signInWithFacebook() async {
-    // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
-    // Check if login was successful
     if (loginResult.status == LoginStatus.success) {
       final AccessToken? accessToken = loginResult.accessToken;
       if (accessToken != null) {
-        // Create a credential from the access token
         final OAuthCredential facebookAuthCredential =
             FacebookAuthProvider.credential(accessToken.token);
 
-        // Once signed in, return the UserCredential
         return FirebaseAuth.instance
             .signInWithCredential(facebookAuthCredential);
       } else {
         throw Exception('Access token is null');
       }
     } else {
-      // Handle case where login was not successful
       throw Exception('Facebook sign in failed');
     }
   }

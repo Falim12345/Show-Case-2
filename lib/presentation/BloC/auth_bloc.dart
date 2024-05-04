@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_showcase_2/core/router/router.dart';
+import 'package:flutter_showcase_2/core/router/routs.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/fairbase_auth_rep_imp.dart';
 import 'package:flutter_showcase_2/domain/interfaces/event.dart';
 import 'package:flutter_showcase_2/domain/interfaces/state.dart';
@@ -41,11 +43,11 @@ class AuthBloc extends Bloc<Event, AppState> {
       try {
         await _authRepositoryImp.signInWithGoogle();
         emit(AuthenticatedState());
+        router.go(AppRouts.home);
       } catch (e) {
         emit(ErrorState(e.toString()));
         emit(UnAuthenticatedState());
       }
     });
-
   }
 }

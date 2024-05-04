@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
+import 'package:flutter_showcase_2/core/router/router.dart';
+import 'package:flutter_showcase_2/core/router/routs.dart';
 import 'package:flutter_showcase_2/core/validator.dart';
 import 'package:flutter_showcase_2/presentation/BloC/auth_bloc.dart';
 import 'package:flutter_showcase_2/presentation/BloC/events.dart';
 import 'package:flutter_showcase_2/presentation/widget/input_text_field.dart';
 import 'package:flutter_showcase_2/presentation/widget/logon_bottom.dart';
 import 'package:flutter_showcase_2/presentation/widget/password_input_text.dart';
+import 'package:flutter_showcase_2/util/hash_password.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 enum AuthMode { signup, login }
 
@@ -134,7 +138,7 @@ class _SingupPageState extends State<SingupPage> {
                 const SizedBox(height: 16),
                 AuthButton(
                   labelText: 'Signup',
-                  onPressed: () {
+                  onPressed: () async {
                     String? emailError = _validator
                         .validateEmail(usernameController.text.trim());
                     String? passwordError = _validator
@@ -146,6 +150,20 @@ class _SingupPageState extends State<SingupPage> {
                         _passwordError = passwordError;
                       });
                     } else {
+                      String hashedPassword = HashPassword()
+                          .hashPassword(passwordController.text.trim());
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.setString(
+                        'hashedPassword',
+                        hashedPassword,
+                      );
+                      await prefs.setString(
+                        'userEmail',
+                        usernameController.text.trim(),
+                      );
+
+                      router.go(AppRouts.verificationPage);
                       authBloc.add(SignUpRequested(
                         email: usernameController.text.trim(),
                         password: passwordController.text.trim(),

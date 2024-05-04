@@ -1,4 +1,5 @@
 import 'package:flutter_showcase_2/presentation/pages/home_page.dart';
+import 'package:flutter_showcase_2/presentation/pages/verification.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../presentation/pages/onboarding.dart';
@@ -18,6 +19,9 @@ final router = GoRouter(
     GoRoute(
       path: AppRouts.onboarding,
       builder: (context, state) => const OnboardingPage(),
-    )
+    ),
+    GoRoute(
+        path: AppRouts.verificationPage,
+        builder: (context, state) => const VerificationPage()),
   ],
 );
