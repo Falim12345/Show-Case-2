@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_showcase_2/data/UseCase/use_case_location.dart';
 import 'package:flutter_showcase_2/data/data_source/geocoder_data_source_imp.dart';
 import 'package:flutter_showcase_2/data/data_source/locator_location_data_source_imp.dart';
 import 'package:flutter_showcase_2/data/data_source/news_data_source.dart';
 import 'package:flutter_showcase_2/data/data_source/weather_data_source_imp.dart';
+import 'package:flutter_showcase_2/data/repositories_imp/fairbase_auth_rep_imp.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/location_rep_imp.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/news_repositories_imp.dart';
 import 'package:flutter_showcase_2/util/api_config.dart';
@@ -51,7 +53,12 @@ class SetupDependenciesImp {
     locator.registerLazySingleton<LocationRepositoryImp>(
         () => LocationRepositoryImp());
 
-    locator.registerLazySingleton<NewsRepositoriesImp>(
-        () => NewsRepositoriesImp());
+    locator.registerSingleton<NewsRepositoriesImp>(NewsRepositoriesImp());
+
+    locator.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
+
+    locator.registerLazySingleton<AuthRepositoryImp>(
+      () => AuthRepositoryImp(),
+    );
   }
 }
