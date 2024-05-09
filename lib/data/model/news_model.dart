@@ -21,6 +21,7 @@ class NewsArticleModel {
         status: json['status'] as String,
         totalResults: json['totalResults'] as int,
         articles: List<Article>.from(
+          // ignore: avoid_dynamic_calls
           json['articles'].map(Article.fromJson) as List<Article>,
         ),
       );
