@@ -7,22 +7,347 @@
 
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
-include: package:flutter_lints/flutter.yaml
+
+include: package:very_good_analysis/analysis_options.5.1.0.yaml
 
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    public_member_api_docs: false
+    sort_pub_dependencies: false
+    one_member_abstracts: false
+    lines_longer_than_80_chars: false
+    avoid_positional_boolean_parameters: false
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+
+analyzer:
+  exclude:
+    - analysis_options.yaml
+    - "*/firebase_options.dart"
+    - "**.freezed.dart"
+    - "**.g.dart"
+    - "**.environment_config.dart"
+    - test/**
+    - lib/firebase_options_production.dart
+    - lib/firebase_options_development.dart
+
+dart_code_metrics:
+  formatter:
+    indent: 0
+    line-length: 110
+    cascading-widget-extensions: false
+  rules-exclude:
+    - lib/presentation/resources/*
+  rules:
+    #  Flutter rules
+    - always-remove-listener
+    - avoid-empty-setstate
+    - avoid-incomplete-copy-with
+    - avoid-missing-image-alt
+    - avoid-recursive-widget-calls
+    - avoid-state-constructors
+    - avoid-undisposed-instances
+    - avoid-unnecessary-overrides-in-state
+    - avoid-unnecessary-setstate
+    - avoid-unnecessary-stateful-widgets
+    - check-for-equals-in-render-object-setters
+    - dispose-fields
+    - prefer-dedicated-media-query-methods
+    - proper-super-calls
+    - use-setstate-synchronously
+    - avoid-border-all
+    - avoid-expanded-as-spacer
+    - avoid-inherited-widget-in-initstate
+    - avoid-late-context
+    - avoid-missing-controller
+    - avoid-returning-widgets
+    - avoid-shrink-wrap-in-lists
+    - avoid-single-child-column-or-row
+    - avoid-unnecessary-gesture-detector
+    - avoid-stateless-widget-initialized-fields
+    - prefer-action-button-tooltip
+    - prefer-const-border-radius
+    - prefer-define-hero-tag
+    - prefer-single-widget-per-file:
+        ignore-private-widgets: true
+    - prefer-sliver-prefix
+    - prefer-text-rich
+    - prefer-using-list-view
+    - prefer-widget-private-members
+
+
+    # Dart rules
+    - arguments-ordering:
+        last:
+          - child
+          - children
+    - avoid-accessing-collections-by-constant-index
+    - avoid-accessing-other-classes-private-members
+    - avoid-async-call-in-sync-function
+    - avoid-barrel-files
+    - avoid-bottom-type-in-patterns
+    - avoid-bottom-type-in-records
+    - avoid-cascade-after-if-null
+    - avoid-casting-to-extension-type
+    - avoid-collapsible-if
+    - avoid-collection-methods-with-unrelated-types
+    - avoid-conditions-with-boolean-literals
+    - avoid-contradictory-expressions
+    - avoid-declaring-call-method
+    - avoid-double-slash-imports
+    - avoid-duplicate-cascades
+    - avoid-duplicate-collection-elements
+    - avoid-duplicate-exports
+    - avoid-duplicate-initializers
+    - avoid-duplicate-map-keys
+    - avoid-duplicate-named-imports
+    - avoid-duplicate-patterns
+    - avoid-duplicate-switch-case-conditions
+    - avoid-duplicate-test-assertions
+    - avoid-dynamic
+    - avoid-empty-spread
+    - avoid-empty-test-groups
+    - avoid-equal-expressions
+    - avoid-excessive-expressions
+    - avoid-explicit-pattern-field-name
+    - avoid-explicit-type-declaration
+    - avoid-extensions-on-records
+    - avoid-function-type-in-records
+    - avoid-future-tostring
+    - avoid-generics-shadowing
+    - avoid-global-state
+    - avoid-identical-exception-handling-blocks
+    - avoid-importing-entrypoint-exports
+    - avoid-inverted-boolean-checks
+    - avoid-keywords-in-wildcard-pattern
+    - avoid-local-functions
+    - avoid-long-files:
+        max-length: 400
+    - avoid-long-functions:
+        max-length: 80
+        ignored-names:
+          - build
+          - builder
+    - avoid-long-parameter-list:
+        ignore-optional: true
+        max-amount: 6
+        ignored-names:
+          - copyWith
+    - avoid-long-records:
+        max-amount: 4
+    - avoid-map-keys-contains
+    - avoid-missed-calls
+    - avoid-missing-completer-stack-trace
+    - avoid-missing-enum-constant-in-map
+    - avoid-missing-interpolation
+    - avoid-misused-wildcard-pattern
+    - avoid-mixing-named-and-positional-fields
+    - avoid-mutating-parameters
+    - avoid-negated-conditions
+    - avoid-nested-conditional-expressions:
+
+        acceptable-level: 2
+    - avoid-nested-extension-types
+    - avoid-nested-futures
+    - avoid-nested-records
+    - avoid-nested-streams-and-futures
+    - avoid-nested-switch-expressions
+    - avoid-nested-switches
+    - avoid-non-null-assertion
+    - avoid-not-encodable-in-to-json
+    - avoid-nullable-interpolation
+    - avoid-nullable-parameters-with-default-values
+    - avoid-nullable-tostring
+    - avoid-one-field-records
+    - avoid-passing-async-when-sync-expected
+    - avoid-passing-default-values
+    - avoid-passing-self-as-argument
+    - avoid-positional-record-field-access
+    - avoid-recursive-calls
+    - avoid-redundant-async
+    - avoid-redundant-else
+    - avoid-redundant-positional-field-name
+    - avoid-redundant-pragma-inline
+    - avoid-referencing-discarded-variables
+    - avoid-renaming-representation-getters
+    - avoid-returning-void
+    - avoid-self-assignment
+    - avoid-self-compare
+    - avoid-shadowed-extension-methods
+    - avoid-shadowing:
+        ignored-names:
+          - context
+    - avoid-slow-collection-methods
+    - avoid-throw-in-catch-block
+    - avoid-throw-objects-without-tostring
+    - avoid-top-level-members-in-tests
+    - avoid-unassigned-late-fields
+    - avoid-unassigned-stream-subscriptions
+    - avoid-uncaught-future-errors
+    - avoid-unconditional-break
+    - avoid-unknown-pragma
+    - avoid-unnecessary-conditionals
+    - avoid-unnecessary-futures
+    - avoid-unnecessary-if
+    - avoid-unnecessary-local-late
+    - avoid-unnecessary-negations
+    - avoid-unnecessary-nullable-return-type
+    - avoid-unnecessary-reassignment
+    - avoid-unnecessary-return
+    - avoid-unnecessary-super
+    - avoid-unnecessary-type-assertions
+    - avoid-unnecessary-type-casts
+    - avoid-unrelated-type-assertions
+    - avoid-unrelated-type-casts
+    - avoid-unsafe-collection-methods
+    - avoid-unused-after-null-check
+    - avoid-unused-generics
+    - avoid-unused-instances
+    - avoid-unused-parameters
+    - avoid-weak-cryptographic-algorithms
+    - avoid-wildcard-cases-with-enums
+    - binary-expression-operand-order
+    - double-literal-format:
+        explicit-trailing-zero: false
+    - enum-constants-ordering
+    - format-comment:
+        only-doc-comments: false
+    - format-test-name
+    - function-always-returns-null
+    - map-keys-ordering
+    - match-getter-setter-field-names
+    - match-lib-folder-structure
+    - match-positional-field-names-on-assignment
+    - member-ordering:
+        order:
+          - constructors
+          - named-constructor
+          - public-fields
+          - private-fields
+          - public-getters
+          - private-getters
+          - public-setters
+          - private-setters
+          - close-method
+          - dispose-method
+          - public-methods
+          - private-methods
+        widgets-order:
+          - constructor
+          - named-constructor
+          - const-fields
+          - final-fields
+          - init-state-method
+          - did-change-dependencies-method
+          - did-update-widget-method
+          - dispose-method
+          - private-methods
+          - overriden-public-methods
+          - build-method
+    - missing-test-assertion
+    - missing-use-result-annotation:
+        types:
+          - Either
+          - Result
+        methods:
+          - toJson
+          - flatMap
+          - map
+    - move-records-to-typedefs:
+        min-fields: 3
+        min-occurences: 2
+    - move-variable-closer-to-its-usage
+    - move-variable-outside-iteration
+    - newline-before-case
+    - newline-before-return
+    - no-boolean-literal-compare
+    - no-empty-block
+    - no-equal-conditions
+    - no-equal-nested-conditions
+    - no-equal-switch-case
+    - no-equal-switch-expression-cases
+    - no-equal-then-else
+    - no-object-declaration
+    - prefer-addition-subtraction-assignments
+    - prefer-any-or-every
+    - prefer-bytes-builder
+    - prefer-conditional-expressions
+    - prefer-correct-callback-field-name:
+        name-pattern: ^on[A-Z]+
+    - prefer-correct-error-name:
+        allowed-names: [ error, exception, failure ]
+
+    - prefer-correct-for-loop-increment
+    - prefer-correct-future-return-type
+    - prefer-correct-identifier-length:
+        max-identifier-length: 30
+        min-identifier-length: 2
+    - prefer-correct-json-casts
+    - prefer-correct-setter-parameter-name
+    - prefer-correct-stream-return-type
+    - prefer-correct-switch-length
+    - prefer-correct-test-file-name
+    - prefer-correct-type-name
+    - prefer-declaring-const-constructor:
+        ignore-abstract: true
+    - prefer-early-return:
+        ignore-if-case: true
+    - prefer-enums-by-name
+    - prefer-explicit-function-type
+    - prefer-explicit-parameter-names
+    - prefer-explicit-type-arguments
+    - prefer-first
+    - prefer-immediate-return
+    - prefer-iterable-of
+    - prefer-last
+    - prefer-match-file-name:
+        exclude:
+          - "test/**"
+          - "lib/**/*wm.dart"
+    - prefer-moving-to-variable:
+        allowed-duplicated-chains: 3
+    - prefer-named-boolean-parameters:
+        ignore-single: true
+        ignore-single-boolean: false
+    - prefer-named-imports
+    - prefer-null-aware-spread
+    - prefer-overriding-parent-equality
+    - prefer-parentheses-with-if-null
+    - prefer-private-extension-type-field
+    - prefer-public-exception-classes
+    - prefer-return-await
+    - prefer-simpler-patterns-null-check
+    - prefer-specific-cases-first
+    - prefer-switch-with-enums
+    - prefer-test-matchers
+    - prefer-trailing-comma
+    - prefer-type-over-var
+    - prefer-unique-test-names
+    - prefer-visible-for-testing-on-members
+    - prefer-wildcard-pattern
+    - unnecessary-trailing-comma
+
+    # Bloc rules
+    - avoid-passing-bloc-to-bloc
+    - check-is-not-closed-after-async-gap
+    - prefer-correct-bloc-provider
+    - prefer-multi-bloc-provider
+
+    # Fake async rules
+    - avoid-async-callback-in-fake-async
+
+
+    # Get It rules
+    - avoid-functions-in-register-singleton
+
+    # Pubspec rules
+    - prefer-correct-package-name
+    - prefer-publish-to-none
+    - prefer-semver-version
+
+    # Intl rules
+    - prefer-date-format
+    - prefer-intl-name
+    - prefer-number-format
+    - prefer-providing-intl-description
+    - prefer-providing-intl-examples
+    - provide-correct-intl-args

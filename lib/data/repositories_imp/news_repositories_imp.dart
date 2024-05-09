@@ -9,21 +9,19 @@ import 'package:flutter_showcase_2/domain/repositories/news_repository.dart';
 import 'package:get_it/get_it.dart';
 
 class NewsRepositoriesImp implements NewsRepository {
+  NewsRepositoriesImp() : _newsDataSoursImp = GetIt.I<NewsDataSoursImp>();
   final NewsDataSoursImp _newsDataSoursImp;
 
-  NewsRepositoriesImp() : _newsDataSoursImp = GetIt.I<NewsDataSoursImp>();
-
   @override
-  Future<Either<Failure, NewsArticleModel>> getNews(
-      {required String country}) async {
+  Future<Either<Failure, NewsArticleModel>> getNews({
+    required String country,
+  }) async {
     try {
-      Either<Failure, Response> response =
-          await _newsDataSoursImp.getNews(country: country);
+      final response = await _newsDataSoursImp.getNews(country: country);
       return response
           .fold((failure) => Left(Failure.server(message: 'Error: $failure')),
               (response) {
-        NewsArticleModel newsArticle =
-            newsArticleFromJson(json.encode(response.data));
+        final newsArticle = newsArticleFromJson(json.encode(response.data));
         return Right(newsArticle);
       });
     } catch (e) {

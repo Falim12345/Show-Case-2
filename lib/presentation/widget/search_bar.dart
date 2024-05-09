@@ -8,7 +8,7 @@ class CustomSearchBar extends StatefulWidget {
 }
 
 class _CustomSearchBarState extends State<CustomSearchBar> {
-  String _searchQuery = '';
+  // String _searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             child: TextField(
               onChanged: (value) {
                 setState(() {
-                  _searchQuery = value;
+                  // _searchQuery = value;
                 });
               },
               decoration: const InputDecoration(

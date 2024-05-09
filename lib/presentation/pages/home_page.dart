@@ -7,7 +7,6 @@ import 'package:flutter_showcase_2/presentation/BloC/news_bloc.dart';
 import 'package:flutter_showcase_2/presentation/BloC/states.dart';
 import 'package:flutter_showcase_2/presentation/widget/news_carusel.dart';
 import 'package:flutter_showcase_2/presentation/widget/news_scroll.dart';
-import 'package:flutter_showcase_2/presentation/widget/search_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

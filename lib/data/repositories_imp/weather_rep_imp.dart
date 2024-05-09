@@ -9,17 +9,15 @@ import 'package:flutter_showcase_2/domain/repositories/weather_rep.dart';
 import 'package:get_it/get_it.dart';
 
 class WeatherRepImp implements WeatherRep {
-  WeatherDataSourseImp weatherDataSourseImp;
   WeatherRepImp() : weatherDataSourseImp = GetIt.I<WeatherDataSourseImp>();
+  WeatherDataSourseImp weatherDataSourseImp;
   @override
   Future<Either<Failure, WeatherModel>> getWeather() async {
     try {
-      Either<Failure, Response> response =
-          await weatherDataSourseImp.getWeatherByCoordinates();
+      final response = await weatherDataSourseImp.getWeatherByCoordinates();
       return response.fold((failure) => throw Exception(failure.message),
           (response) {
-        WeatherModel weatherData =
-            weatherModelFromJson(json.encode(response.data));
+        final weatherData = weatherModelFromJson(json.encode(response.data));
         return Right(weatherData);
       });
     } catch (e) {
