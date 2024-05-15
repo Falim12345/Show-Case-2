@@ -14,3 +14,7 @@ class WeatherApiConfig {
   final String apiKey = '2d92e6160501400b923123326230511';
   final String weatherCurl = 'http://api.weatherapi.com/v1/current.json';
 }
+
+class CountryApiConfig {
+  static const String countryListCurl = 'https://restcountries.com/v3.1/all';
+}

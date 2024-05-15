@@ -7,27 +7,28 @@ import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 
 class NewsDataSoursImp implements NewsDataSource {
+  NewsDataSoursImp()
+      : _dio = GetIt.I<Dio>(),
+        _apiConfig = GetIt.I<ApiNewsConfig>();
   final Dio _dio;
   final ApiNewsConfig _apiConfig;
   final _logger = Logger();
 
-  NewsDataSoursImp()
-      : _dio = GetIt.I<Dio>(),
-        _apiConfig = GetIt.I<ApiNewsConfig>();
-
   @override
-  Future<Either<Failure, Response<dynamic>>> getNews(
-      {required String country}) async {
+  Future<Either<Failure, Response<dynamic>>> getNews({
+    required String country,
+  }) async {
     try {
-      Response response = await _dio.get(
+      final response = await _dio.get<Map<String, dynamic>>(
         _apiConfig.newsCurl,
-        queryParameters: {"country": country},
+        queryParameters: {'country': country},
         options: Options(
           headers: {'Authorization': 'Bearer ${_apiConfig.apiKey}'},
         ),
       );
       _logger.d(
-          '###NEWS###Response status code: ${response.statusCode},${response.runtimeType}');
+        '###NEWS###Response status code: ${response.statusCode},${response.runtimeType}',
+      );
       return Right(response);
     } catch (e) {
       return Left(Failure.server(message: 'Error: $e'));
@@ -43,10 +44,9 @@ class NewsDataSoursImp implements NewsDataSource {
     required int page,
   }) async {
     try {
-      Response<Map<String, dynamic>> response =
-          await _dio.get<Map<String, dynamic>>(
+      final response = await _dio.get(
         _apiConfig.searchNewsCurl,
-        queryParameters: {"q": q, "datefrom": datefrom, "sortBy": sortBy},
+        queryParameters: {'q': q, 'datefrom': datefrom, 'sortBy': sortBy},
         options: Options(
           headers: {'Authorization': 'Bearer ${_apiConfig.apiKey}'},
         ),

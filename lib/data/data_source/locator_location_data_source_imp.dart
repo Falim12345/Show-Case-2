@@ -4,7 +4,8 @@ import 'package:geolocator/geolocator.dart';
 class LocatorLocationDataSource implements LocationDataSourse {
   @override
   Future<Position> getCurrentPosition() async {
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+    return Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
   }
 }

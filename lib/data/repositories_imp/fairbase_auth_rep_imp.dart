@@ -5,18 +5,20 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepositoryImp {
-  final FirebaseAuth _firebaseAuth;
   AuthRepositoryImp() : _firebaseAuth = GetIt.I<FirebaseAuth>();
+  final FirebaseAuth _firebaseAuth;
 
-  Future<void> onEmailAndPassword(
-      {required String email, required String password}) async {
+  Future<void> onEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       final credential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email.trim(),
         password: password.trim(),
       );
       if (credential.user != null) {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final prefs = await SharedPreferences.getInstance();
         await prefs.setString('user_uid', credential.user!.uid);
       }
     } on FirebaseAuthException catch (e) {
@@ -29,10 +31,9 @@ class AuthRepositoryImp {
 
   Future<void> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final googleUser = await GoogleSignIn().signIn();
 
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+      final googleAuth = await googleUser?.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -46,12 +47,12 @@ class AuthRepositoryImp {
   }
 
   Future<UserCredential> signInWithFacebook() async {
-    final LoginResult loginResult = await FacebookAuth.instance.login();
+    final loginResult = await FacebookAuth.instance.login();
 
     if (loginResult.status == LoginStatus.success) {
-      final AccessToken? accessToken = loginResult.accessToken;
+      final accessToken = loginResult.accessToken;
       if (accessToken != null) {
-        final OAuthCredential facebookAuthCredential =
+        final facebookAuthCredential =
             FacebookAuthProvider.credential(accessToken.token);
 
         return FirebaseAuth.instance
