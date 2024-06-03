@@ -4,12 +4,13 @@ import 'package:flutter_showcase_2/data/model/news_model.dart';
 import 'package:flutter_showcase_2/presentation/widget/news_card.dart';
 
 class NewsCarousel extends StatelessWidget {
-  final List<Article> articles; // Список новостей
+  // Список новостей
 
   const NewsCarousel({
     required this.articles,
     super.key,
   });
+  final List<Article> articles;
 
   @override
   Widget build(BuildContext context) {

@@ -5,13 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_showcase_2/core/app_theme.dart';
 import 'package:flutter_showcase_2/core/router/router.dart';
 // import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'package:flutter_showcase_2/core/setap_dependencies.dart';
-import 'package:flutter_showcase_2/data/data_source/get_country_list_sourse_imp.dart';
-import 'package:flutter_showcase_2/data/data_source/news_data_source.dart';
-import 'package:flutter_showcase_2/data/model/country.dart';
 import 'package:flutter_showcase_2/data/repositories_imp/fairbase_auth_rep_imp.dart';
-import 'package:flutter_showcase_2/data/repositories_imp/get_country_list_rep_imp.dart';
 import 'package:flutter_showcase_2/presentation/BloC/auth_bloc.dart';
 import 'package:flutter_showcase_2/presentation/BloC/news_bloc.dart';
 import 'package:flutter_showcase_2/presentation/pages/home_page.dart';

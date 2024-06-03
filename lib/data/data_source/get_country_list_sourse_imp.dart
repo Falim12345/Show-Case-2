@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/src/response.dart';
 import 'package:flutter_showcase_2/core/error/failure.dart';
-import 'package:flutter_showcase_2/domain/interfaces/get_coutry_list_sourse.dart';
+import 'package:flutter_showcase_2/domain/entities/get_coutry_list_sourse.dart';
 import 'package:flutter_showcase_2/util/api_config.dart';
 import 'package:get_it/get_it.dart';
 

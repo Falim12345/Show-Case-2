@@ -1,10 +1,4 @@
 class SearchNewsParams {
-  final String q;
-  final String datefrom;
-  final String sortBy;
-  final int pageSize;
-  final int page;
-
   SearchNewsParams({
     required this.q,
     required this.datefrom,
@@ -12,4 +6,9 @@ class SearchNewsParams {
     required this.pageSize,
     required this.page,
   });
+  final String q;
+  final String datefrom;
+  final String sortBy;
+  final int pageSize;
+  final int page;
 }

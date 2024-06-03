@@ -14,8 +14,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(color: Colors.grey)),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey),
+      ),
       child: Row(
         children: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
@@ -27,7 +28,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 });
               },
               decoration: const InputDecoration(
-                  hintText: 'Search', border: InputBorder.none),
+                hintText: 'Search',
+                border: InputBorder.none,
+              ),
             ),
           ),
           IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),

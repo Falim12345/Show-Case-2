@@ -5,12 +5,11 @@ import 'package:get_it/get_it.dart';
 import '../../domain/UseCase/use_case.dart';
 
 class GetLocationUseCase extends UseCase<Location, void> {
+  GetLocationUseCase() : _locationRepository = GetIt.I<LocationRepositoryImp>();
   final LocationRepositoryImp _locationRepository;
 
-  GetLocationUseCase() : _locationRepository = GetIt.I<LocationRepositoryImp>();
-
   @override
-  Future<Location> call(params) async {
-    return await _locationRepository.getLocation();
+  Future<Location> call(params) {
+    return _locationRepository.getLocation();
   }
 }

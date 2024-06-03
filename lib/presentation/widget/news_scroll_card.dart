@@ -67,12 +67,11 @@ class NewsScrollCard extends StatelessWidget {
                         article.urlToImage!,
                         fit: BoxFit.cover,
                       )
-                    : const SizedBox(), // Placeholder для отображения, если изображение недоступно
+                    : const SizedBox(),
               ),
               const SizedBox(
                 width: 8,
-              ), // Пространство между фотографией и текстом
-              // Название и краткое описание
+              ),
               Expanded(
                 child: Column(
                   children: [

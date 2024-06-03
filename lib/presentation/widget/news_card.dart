@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_showcase_2/core/app_colors.dart';
-import '../../data/model/news_model.dart';
+import 'package:flutter_showcase_2/data/model/news_model.dart';
 
 class NewsCard extends StatelessWidget {
+  const NewsCard({
+    required this.article,
+    super.key,
+  });
   final Article article;
-
-  const NewsCard({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {

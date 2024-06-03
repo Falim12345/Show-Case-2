@@ -3,10 +3,10 @@ import 'package:flutter_showcase_2/core/app_colors.dart';
 
 class InputTextField extends StatelessWidget {
   const InputTextField({
-    super.key,
     required this.labelText,
     required this.onChanged,
     required this.controller,
+    super.key,
     this.errorText,
   });
   final String labelText;
@@ -24,7 +24,9 @@ class InputTextField extends StatelessWidget {
               Text(
                 labelText,
                 style: const TextStyle(
-                    color: Color(0xFFB0B3B8), fontFamily: 'Poppins'),
+                  color: Color(0xFFB0B3B8),
+                  fontFamily: 'Poppins',
+                ),
               ),
               const Text('*', style: TextStyle(color: AppColors.errorColor)),
             ],
@@ -39,11 +41,15 @@ class InputTextField extends StatelessWidget {
               filled: true,
               fillColor: const Color(0xFF3A3B3C),
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide.none),
+                borderRadius: BorderRadius.circular(
+                  10,
+                ),
+                borderSide: BorderSide.none,
+              ),
               focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide.none),
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
             ),
           ),
         ],

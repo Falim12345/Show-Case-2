@@ -1,19 +1,17 @@
-import 'package:flutter_showcase_2/domain/interfaces/event.dart';
+import 'package:flutter_showcase_2/domain/entities/event.dart';
 
 class SignInRequested extends Event {
+  SignInRequested(this.email, this.password);
   final String email;
   final String password;
-
-  SignInRequested(this.email, this.password);
   @override
   List<Object?> get props => [];
 }
 
 class SignUpRequested extends Event {
+  SignUpRequested({required this.email, required this.password});
   final String email;
   final String password;
-
-  SignUpRequested({required this.email, required this.password});
   @override
   List<Object?> get props => [];
 }
@@ -33,7 +31,6 @@ class SignOutRequested extends Event {
 }
 
 class FetchNewsEvent extends Event {
-  final String country;
-
   FetchNewsEvent({required this.country});
+  final String country;
 }

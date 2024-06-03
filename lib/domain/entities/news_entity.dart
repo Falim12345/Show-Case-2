@@ -1,13 +1,4 @@
 class NewsEntity {
-  final String sourceName;
-  final String author;
-  final String title;
-  final String description;
-  final String url;
-  final String imageUrl;
-  final DateTime publishedAt;
-  final String content;
-
   NewsEntity({
     required this.sourceName,
     required this.author,
@@ -18,4 +9,12 @@ class NewsEntity {
     required this.publishedAt,
     required this.content,
   });
+  final String sourceName;
+  final String author;
+  final String title;
+  final String description;
+  final String url;
+  final String imageUrl;
+  final DateTime publishedAt;
+  final String content;
 }

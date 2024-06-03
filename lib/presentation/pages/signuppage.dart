@@ -34,7 +34,7 @@ class _SingupPageState extends State<SingupPage> {
 
   @override
   Widget build(BuildContext context) {
-    AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
+    final authBloc = BlocProvider.of<AuthBloc>(context);
 
     return Scaffold(
       body: SafeArea(
@@ -78,7 +78,7 @@ class _SingupPageState extends State<SingupPage> {
                 Text(
                   authMode == AuthMode.signup
                       ? 'Signup to get Started'
-                      : 'Welcome back you\'ve \nbeen missed!',
+                      : "Welcome back you've \nbeen missed!",
                   style: const TextStyle(
                     color: Color(0xFFB0B3B8),
                     fontSize: 18,
@@ -111,8 +111,6 @@ class _SingupPageState extends State<SingupPage> {
                   errorText: _passwordError,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Checkbox(
                       value: _isChecked,
@@ -139,9 +137,9 @@ class _SingupPageState extends State<SingupPage> {
                 AuthButton(
                   labelText: 'Signup',
                   onPressed: () async {
-                    String? emailError = _validator
+                    final emailError = _validator
                         .validateEmail(usernameController.text.trim());
-                    String? passwordError = _validator
+                    final passwordError = _validator
                         .validatePassword(passwordController.text.trim());
 
                     if (emailError != null || passwordError != null) {
@@ -150,10 +148,9 @@ class _SingupPageState extends State<SingupPage> {
                         _passwordError = passwordError;
                       });
                     } else {
-                      String hashedPassword = HashPassword()
+                      final hashedPassword = HashPassword()
                           .hashPassword(passwordController.text.trim());
-                      SharedPreferences prefs =
-                          await SharedPreferences.getInstance();
+                      final prefs = await SharedPreferences.getInstance();
                       await prefs.setString(
                         'hashedPassword',
                         hashedPassword,
@@ -164,17 +161,18 @@ class _SingupPageState extends State<SingupPage> {
                       );
 
                       router.go(AppRouts.verificationPage);
-                      authBloc.add(SignUpRequested(
-                        email: usernameController.text.trim(),
-                        password: passwordController.text.trim(),
-                      ));
+                      authBloc.add(
+                        SignUpRequested(
+                          email: usernameController.text.trim(),
+                          password: passwordController.text.trim(),
+                        ),
+                      );
                     }
                   },
                 ),
                 const SizedBox(height: 6),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [Text('or continue with')],
                 ),
                 const SizedBox(height: 10),
@@ -182,62 +180,72 @@ class _SingupPageState extends State<SingupPage> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
                           ),
-                          onPressed: () {},
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.facebook),
-                              Text('Facebook'),
-                            ],
-                          )),
+                        ),
+                        onPressed: () {},
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.facebook),
+                            Text('Facebook'),
+                          ],
+                        ),
+                      ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
                           ),
-                          onPressed: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton.icon(
-                                icon: Image.network(
-                                    'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-32.png'),
-                                label: const Text(
-                                  'Google',
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                onPressed: () {
-                                  authBloc.add(GoogleSignInRequested());
-                                },
-                              )
-                            ],
-                          )),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton.icon(
+                              icon: Image.network(
+                                'https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-32.png',
+                              ),
+                              label: const Text(
+                                'Google',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              onPressed: () {
+                                authBloc.add(GoogleSignInRequested());
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 10),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Text(authMode == AuthMode.signup
-                      ? 'Already have an account ?'
-                      : 'don`t have an account ?'),
-                  const SizedBox(width: 3),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      authMode == AuthMode.signup ? 'login' : 'Sign Up',
-                      style: const TextStyle(color: AppColors.primaryColor),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      authMode == AuthMode.signup
+                          ? 'Already have an account ?'
+                          : 'don`t have an account ?',
                     ),
-                  )
-                ]),
+                    const SizedBox(width: 3),
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        authMode == AuthMode.signup ? 'login' : 'Sign Up',
+                        style: const TextStyle(color: AppColors.primaryColor),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

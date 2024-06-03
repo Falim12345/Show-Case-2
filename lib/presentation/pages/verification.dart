@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_showcase_2/presentation/widget/logon_bottom.dart';
 
 class VerificationPage extends StatefulWidget {
-  const VerificationPage({Key? key}) : super(key: key);
+  const VerificationPage({super.key});
 
   @override
   State<VerificationPage> createState() => _VerificationPageState();
@@ -20,7 +19,7 @@ class _VerificationPageState extends State<VerificationPage> {
 
   @override
   void dispose() {
-    for (var controller in _controllers) {
+    for (final controller in _controllers) {
       controller.dispose();
     }
     super.dispose();
@@ -39,11 +38,15 @@ class _VerificationPageState extends State<VerificationPage> {
           ),
           child: Column(
             children: [
-              const Text('OTP Verification',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text(
+                'OTP Verification',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 27),
-              const Text('Enter Verification Code',
-                  style: TextStyle(fontSize: 18)),
+              const Text(
+                'Enter Verification Code',
+                style: TextStyle(fontSize: 18),
+              ),
               const SizedBox(height: 27),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -54,7 +57,7 @@ class _VerificationPageState extends State<VerificationPage> {
               ),
               const SizedBox(height: 27),
               const Text(
-                'Didn\'t receive code?',
+                "Didn't receive code?",
               ),
               Expanded(
                 child: Padding(
@@ -67,7 +70,7 @@ class _VerificationPageState extends State<VerificationPage> {
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -91,7 +94,10 @@ class _VerificationPageState extends State<VerificationPage> {
         maxLength: 1,
         textAlign: TextAlign.center,
         style: const TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
         decoration: const InputDecoration(
           counterText: '',
           border: InputBorder.none,
@@ -103,7 +109,7 @@ class _VerificationPageState extends State<VerificationPage> {
             } else {
               // If last field, submit verification or do whatever you need
               // For demonstration purposes, I'm just printing the code
-              String code =
+              final code =
                   _controllers.map((controller) => controller.text).join();
               print('Verification code is: $code');
             }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_showcase_2/core/error/failure.dart';
 import 'package:flutter_showcase_2/data/data_source/weather_data_source_imp.dart';
 import 'package:flutter_showcase_2/data/model/weather_model.dart';

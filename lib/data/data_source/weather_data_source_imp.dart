@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_showcase_2/core/error/failure.dart';
 import 'package:flutter_showcase_2/data/UseCase/use_case_location.dart';
-import 'package:flutter_showcase_2/domain/interfaces/weather_data_sourse.dart';
+import 'package:flutter_showcase_2/domain/entities/weather_data_sourse.dart';
 import 'package:flutter_showcase_2/util/api_config.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
