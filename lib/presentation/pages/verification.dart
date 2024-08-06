@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_showcase_2/core/router/router.dart';
+import 'package:flutter_showcase_2/core/router/routs.dart';
 import 'package:flutter_showcase_2/presentation/widget/logon_bottom.dart';
 
 class VerificationPage extends StatefulWidget {
@@ -66,7 +68,9 @@ class _VerificationPageState extends State<VerificationPage> {
                     alignment: Alignment.bottomCenter,
                     child: AuthButton(
                       labelText: 'Verify',
-                      onPressed: () {},
+                      onPressed: () {
+                        router.go(AppRouts.home);
+                      },
                     ),
                   ),
                 ),

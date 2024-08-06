@@ -20,7 +20,8 @@ class NewsRepositoriesImp implements NewsRepository {
       return response
           .fold((failure) => Left(Failure.server(message: 'Error: $failure')),
               (response) {
-        final newsArticle = newsArticleFromJson(json.encode(response.data));
+        final newsArticle =
+            NewsArticleModel.fromJson(response.data as Map<String, dynamic>);
         return Right(newsArticle);
       });
     } catch (e) {
@@ -48,7 +49,7 @@ class NewsRepositoriesImp implements NewsRepository {
           .fold((failure) => Left(Failure.server(message: 'Error: $failure')),
               (response) {
         final newsSearchArticle =
-            newsArticleFromJson(json.encode(response.data));
+            NewsArticleModel.fromJson(response.data as Map<String, dynamic>);
         return Right(newsSearchArticle);
       });
     } catch (e) {
